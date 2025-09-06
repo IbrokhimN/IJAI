@@ -1,2 +1,3 @@
-## IJAI
-Work in progress
+## IJAD ##
+
+в этапе разработки...
