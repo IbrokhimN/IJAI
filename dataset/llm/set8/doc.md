@@ -1,6 +1,6 @@
-# Wikipedia Dataset (10,500 Articles) — Part 8
+# Wikipedia Dataset (10,279 Articles) — Part 8
 
-This repository contains **10,500 Wikipedia articles**, exported for research and experimentation purposes.  
+This repository contains **10,279 Wikipedia articles**, exported for research and experimentation purposes.  
 This is **Part 8** of the full dataset collection.
 
 ## Files
@@ -18,4 +18,4 @@ This is **Part 8** of the full dataset collection.
 - The `.apk` file can be installed on an Android device or emulator for testing.
 
 ## License
-The articles are sourced from [Wikipedia](https://www.wikipedia.org/) and distributed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
+The articles are sourced from [Wikipedia](https://www.wikipedia.org/)
