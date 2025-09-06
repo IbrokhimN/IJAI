@@ -10,18 +10,16 @@ from transformers import (
     DataCollatorForLanguageModeling,
 )
 
-# === 0. Темы для обучения ===
 articles = [
-    "Python",  # возьмёт все статьи про Python
-    "Фридрих Гаусс",  # точная статья
+    "Python", 
+    "Фридрих Гаусс", 
     "Machine Learning",
     ]
 
-# === 1. Настройка википедии ===
 DATASET_DIR = "dataset"
 os.makedirs(DATASET_DIR, exist_ok=True)
 
-wiki = wikipediaapi.Wikipedia("en")  # "ru" если нужна русская вики
+wiki = wikipediaapi.Wikipedia("en")  
 
 all_texts = []
 
@@ -42,16 +40,14 @@ for topic in articles:
     if page.exists():
         save_page(page)
     else:
-        # Если точной статьи нет → ищем все статьи по ключевому слову
         print(f"🔎 Поиск статей по теме: {topic}")
-        results = wiki.search(topic, results=10)  # можно увеличить число
+        results = wiki.search(topic, results=10) 
         if not results:
             print(f"❌ Ничего не найдено: {topic}")
         for r in results:
             p = wiki.page(r)
             save_page(p)
 
-# === 2. Собираем train.txt и eval.txt ===
 if all_texts:
     full_text = "\n\n".join(all_texts)
     train_path = "train.txt"
@@ -67,13 +63,11 @@ if all_texts:
 else:
     raise ValueError("❌ Нет статей для обучения")
 
-# === 3. Загружаем токенайзер и модель GPT-2 Medium ===
 model_name = "gpt2-medium"
 tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 model = GPT2LMHeadModel.from_pretrained(model_name)
 
-# === 4. Загружаем датасеты ===
 def load_dataset(file_path, tokenizer, block_size=512):
     return TextDataset(
         tokenizer=tokenizer,
@@ -84,17 +78,15 @@ def load_dataset(file_path, tokenizer, block_size=512):
 train_dataset = load_dataset(train_path, tokenizer)
 eval_dataset = load_dataset(eval_path, tokenizer)
 
-# === 5. Collator ===
 data_collator = DataCollatorForLanguageModeling(
     tokenizer=tokenizer,
     mlm=False,
 )
 
-# === 6. Аргументы обучения ===
 training_args = TrainingArguments(
     output_dir="./gpt2-medium-finetuned",
     overwrite_output_dir=True,
-    num_train_epochs=2,  # 🔥 норм для вики
+    num_train_epochs=2, 
     per_device_train_batch_size=2,
     per_device_eval_batch_size=2,
     gradient_accumulation_steps=8,
@@ -108,13 +100,11 @@ training_args = TrainingArguments(
     fp16=torch.cuda.is_available(),
     report_to="none",
 
-    # сохраняем только лучший результат
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss",
     greater_is_better=False,
 )
 
-# === 7. Trainer ===
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -124,10 +114,8 @@ trainer = Trainer(
     data_collator=data_collator,
 )
 
-# === 8. Запускаем обучение ===
 trainer.train()
 
-# === 9. Сохраняем только лучший вариант ===
 trainer.save_model("./best_model")
 tokenizer.save_pretrained("./best_model")
 
