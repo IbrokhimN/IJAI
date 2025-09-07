@@ -1,1040 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus.io Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4285F4;
-            --primary-dark: #3367D6;
-            --accent-color: #34A853;
-            --warn-color: #EA4335;
-            --text-primary: #202124;
-            --text-secondary: #5F6368;
-            --bg-color: #F8F9FA;
-            --card-color: #FFFFFF;
-            --divider-color: #DADCE0;
-            --sidebar-width: 260px;
-            --header-height: 64px;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background-color: var(--card-color);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-            z-index: 100;
-        }
-
-        .logo-container {
-            padding: 24px;
-            border-bottom: 1px solid var(--divider-color);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 12px;
-        }
-
-        .nav-section {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--divider-color);
-        }
-
-        .nav-title {
-            padding: 8px 24px;
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            letter-spacing: 1.2px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .nav-item:hover {
-            background-color: rgba(66, 133, 244, 0.1);
-            color: var(--primary-color);
-        }
-
-        .nav-item.active {
-            color: var(--primary-color);
-            background-color: rgba(66, 133, 244, 0.1);
-        }
-
-        .nav-item i {
-            margin-right: 16px;
-            font-size: 20px;
-        }
-
-        .nav-label {
-            font-size: 14px;
-            font-weight: 500;
-            flex: 1;
-        }
-
-        .nav-badge {
-            background-color: var(--warn-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .beta-badge {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-            padding: 24px;
-            background-color: rgba(66, 133, 244, 0.05);
-        }
-
-        .team-title {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .team-members {
-            display: flex;
-            margin-bottom: 16px;
-        }
-
-        .team-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            margin-right: -8px;
-            border: 2px solid white;
-        }
-
-        .upgrade-btn {
-            width: 100%;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .upgrade-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .upgrade-btn i {
-            margin-right: 8px;
-        }
-
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* Header Styles */
-        .header {
-            height: var(--header-height);
-            background-color: var(--card-color);
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            z-index: 90;
-        }
-
-        .search-container {
-            flex: 1;
-            max-width: 480px;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 20px;
-            padding-left: 48px;
-            border: none;
-            background-color: var(--bg-color);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px var(--primary-color);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .action-btn {
-            background: none;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            margin-left: 8px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-        }
-
-        .action-btn:hover {
-            background-color: var(--bg-color);
-        }
-
-        .action-btn i {
-            margin-right: 8px;
-        }
-
-        .icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .icon-btn:hover {
-            background-color: var(--bg-color);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            margin-left: 16px;
-            cursor: pointer;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-            margin-right: 12px;
-        }
-
-        .user-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .user-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .user-role {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        /* Content Area Styles */
-        .content {
-            flex: 1;
-            padding: 24px;
-            overflow-y: auto;
-        }
-
-        .page-title {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 24px;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .card {
-            background-color: var(--card-color);
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            padding: 24px;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background-color: rgba(66, 133, 244, 0.1);
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .card-value {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .card-metric {
-            font-size: 14px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-        }
-
-        .positive {
-            color: var(--accent-color);
-        }
-
-        .negative {
-            color: var(--warn-color);
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .chart-container {
-            background-color: var(--card-color);
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            padding: 24px;
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .chart-title {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .chart-actions {
-            display: flex;
-        }
-
-        .chart-actions select {
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: 1px solid var(--divider-color);
-            background-color: var(--card-color);
-            margin-left: 8px;
-            cursor: pointer;
-        }
-
-        .chart-canvas {
-            width: 100%;
-            height: 300px;
-        }
-
-        .pie-chart-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 300px;
-        }
-
-        .integration-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .integration-table th, .integration-table td {
-            padding: 12px 16px;
-            text-align: left;
-        }
-
-        .integration-table th {
-            font-weight: 500;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--divider-color);
-        }
-
-        .integration-table tr {
-            border-bottom: 1px solid var(--divider-color);
-            transition: var(--transition);
-        }
-
-        .integration-table tr:last-child {
-            border-bottom: none;
-        }
-
-        .integration-table tr:hover {
-            background-color: var(--bg-color);
-        }
-
-        /* Page specific styles */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                padding: 0 16px;
-            }
-            
-            .search-container {
-                max-width: 200px;
-            }
-            
-            .user-info {
-                display: none;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animated {
-            animation: fadeIn 0.5s ease forwards;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Local Monitor — Nexus Insights</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  :root{
+    --p:#4285F4; --g:#34A853; --bg:#F6F7FB; --card:#fff; --muted:#5F6368;
+    --shadow:0 6px 18px rgba(18,38,63,0.08); --radius:12px;
+    --gap:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,Roboto,Arial,sans-serif;background:var(--bg);color:#111}
+  .app{display:flex;min-height:100vh;gap:var(--gap)}
+  /* sidebar */
+  .sidebar{width:240px;background:var(--card);padding:20px;border-right:1px solid rgba(0,0,0,0.04);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--p)}
+  .small{font-size:13px;color:var(--muted)}
+  .nav{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+  .nav button{background:transparent;border:0;padding:10px;border-radius:8px;text-align:left;cursor:pointer;color:var(--muted)}
+  .nav button.active{background:rgba(66,133,244,0.08);color:var(--p)}
+  .sidebar .footer{margin-top:auto;font-size:13px;color:var(--muted)}
+  /* main */
+  .main{flex:1;padding:20px;display:flex;flex-direction:column;gap:16px}
+  .top{display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .cards{display:flex;gap:12px;flex-wrap:wrap}
+  .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);min-width:180px;flex:1;max-width:320px}
+  .card .label{font-size:13px;color:var(--muted)}
+  .card .value{font-size:20px;font-weight:700;margin-top:6px}
+  .controls{display:flex;gap:8px;align-items:center}
+  .btn{background:var(--p);color:white;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--p);border:1px solid rgba(66,133,244,0.12)}
+  .grid{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:start}
+  .panel{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}
+  .panel h3{margin:0 0 10px 0;font-size:16px}
+  /* history table */
+  .searchline{display:flex;gap:8px;margin-bottom:8px}
+  input[type="search"], select{padding:8px;border-radius:8px;border:1px solid #e6e9ef;flex:1}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px;text-align:left;border-bottom:1px solid #f1f3f6;color:#222}
+  tr.small td{font-size:12px;color:var(--muted)}
+  .muted{color:var(--muted)}
+  /* charts */
+  canvas{width:100%;height:180px;display:block}
+  .stat-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chip{background:#f3f6ff;padding:6px 8px;border-radius:999px;font-size:13px;color:var(--p)}
+  /* responsive */
+  @media (max-width:900px){
+    .app{flex-direction:column}
+    .sidebar{width:100%;flex-direction:row;align-items:center;overflow:auto}
+    .main{padding:12px}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo-container">
-            <div class="logo">
-                <i class="material-icons">dashboard</i>
-                Nexus.io
-            </div>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-item active" data-page="dashboard">
-                <i class="material-icons">dashboard</i>
-                <span class="nav-label">Dashboard</span>
-            </div>
-            <div class="nav-item" data-page="payment">
-                <i class="material-icons">payment</i>
-                <span class="nav-label">Payment</span>
-            </div>
-            <div class="nav-item" data-page="customers">
-                <i class="material-icons">people</i>
-                <span class="nav-label">Customers</span>
-            </div>
-            <div class="nav-item" data-page="message">
-                <i class="material-icons">message</i>
-                <span class="nav-label">Message</span>
-                <span class="nav-badge">3</span>
-            </div>
-            <div class="nav-item" data-page="product">
-                <i class="material-icons">inventory</i>
-                <span class="nav-label">Product</span>
-            </div>
-            <div class="nav-item" data-page="invoice">
-                <i class="material-icons">receipt</i>
-                <span class="nav-label">Invoice</span>
-            </div>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-item" data-page="analytics">
-                <i class="material-icons">analytics</i>
-                <span class="nav-label">Analytics</span>
-            </div>
-            <div class="nav-item" data-page="automation">
-                <i class="material-icons">settings_automation</i>
-                <span class="nav-label">Automation</span>
-                <span class="beta-badge">BETA</span>
-            </div>
-        </div>
-        
-        <div class="nav-section">
-            <div class="nav-item" data-page="settings">
-                <i class="material-icons">settings</i>
-                <span class="nav-label">Settings</span>
-            </div>
-            <div class="nav-item" data-page="security">
-                <i class="material-icons">security</i>
-                <span class="nav-label">Security</span>
-            </div>
-            <div class="nav-item" data-page="help">
-                <i class="material-icons">help</i>
-                <span class="nav-label">Help</span>
-            </div>
-        </div>
-        
-        <div class="sidebar-footer">
-            <div class="team-title">Team Members</div>
-            <div class="team-members">
-                <div class="team-avatar">JD</div>
-                <div class="team-avatar">MA</div>
-                <div class="team-avatar">SK</div>
-                <div class="team-avatar">+3</div>
-            </div>
-            <button class="upgrade-btn" id="upgradePlan">
-                <i class="material-icons">workspace_premium</i>
-                Upgrade Plan
-            </button>
-        </div>
-    </aside>
+<div class="app">
+  <aside class="sidebar" aria-label="sidebar">
+    <div class="brand"><i class="material-icons" style="font-size:20px">memory</i>Nexus Insights</div>
+    <div class="small">Local AI monitor — shows how the model interacts with your PC</div>
+    <nav class="nav" id="nav">
+      <button class="active" data-page="overview">Overview</button>
+      <button data-page="history">Requests</button>
+      <button data-page="resources">Resources</button>
+      <button data-page="privacy">Privacy</button>
+      <button data-page="settings">Settings</button>
+    </nav>
+    <div class="footer">Version <strong>0.9</strong> · Local demo</div>
+  </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Header -->
-        <header class="header">
-            <div class="search-container">
-                <i class="material-icons search-icon">search</i>
-                <input type="text" class="search-input" placeholder="Search...">
-            </div>
-            
-            <div class="header-actions">
-                <button class="action-btn">
-                    <i class="material-icons">filter_list</i>
-                    Filter
-                </button>
-                <button class="action-btn" id="exportBtn">
-                    <i class="material-icons">file_download</i>
-                    Export
-                </button>
-                
-                <div class="icon-btn">
-                    <i class="material-icons">notifications</i>
-                </div>
-                
-                <div class="icon-btn">
-                    <i class="material-icons">settings</i>
-                </div>
-                
-                <div class="user-profile">
-                    <div class="user-avatar">YA</div>
-                    <div class="user-info">
-                        <div class="user-name">Young Alaska</div>
-                        <div class="user-role">Business</div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Content Area -->
-        <div class="content">
-            <!-- Dashboard Page -->
-            <div class="page active" id="dashboard">
-                <h1 class="page-title">Dashboard</h1>
-                
-                <div class="dashboard-grid">
-                    <div class="card animated">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="material-icons">visibility</i>
-                            </div>
-                            <div class="card-title">Page Views</div>
-                        </div>
-                        <div class="card-value">42.5k</div>
-                        <div class="card-metric positive">
-                            <i class="material-icons">arrow_upward</i>
-                            <span>+12.5% from last week</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card animated delay-1">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="material-icons">attach_money</i>
-                            </div>
-                            <div class="card-title">Total Revenue</div>
-                        </div>
-                        <div class="card-value">$24,825</div>
-                        <div class="card-metric positive">
-                            <i class="material-icons">arrow_upward</i>
-                            <span>+8.2% from last week</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card animated delay-2">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="material-icons">trending_down</i>
-                            </div>
-                            <div class="card-title">Bounce Rate</div>
-                        </div>
-                        <div class="card-value">28.3%</div>
-                        <div class="card-metric negative">
-                            <i class="material-icons">arrow_downward</i>
-                            <span>-3.7% from last week</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Sales Overview</h2>
-                            <div class="chart-actions">
-                                <select>
-                                    <option>Last 7 Days</option>
-                                    <option>Last 30 Days</option>
-                                    <option>Last 90 Days</option>
-                                </select>
-                            </div>
-                        </div>
-                        <canvas id="salesChart" class="chart-canvas"></canvas>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Total Subscriber</h2>
-                            <div class="chart-actions">
-                                <select>
-                                    <option>Weekly</option>
-                                    <option>Monthly</option>
-                                </select>
-                            </div>
-                        </div>
-                        <canvas id="subscriberChart" class="chart-canvas"></canvas>
-                    </div>
-                </div>
-                
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">Sales Distribution</h2>
-                            <div class="chart-actions">
-                                <select>
-                                    <option>This Month</option>
-                                    <option>Last Month</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pie-chart-container">
-                            <canvas id="distributionChart" width="300" height="300"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h2 class="chart-title">List of Integration</h2>
-                            <div class="chart-actions">
-                                <select>
-                                    <option>All</option>
-                                    <option>Active</option>
-                                </select>
-                            </div>
-                        </div>
-                        <table class="integration-table">
-                            <thead>
-                                <tr>
-                                    <th>Application</th>
-                                    <th>Type</th>
-                                    <th>Rate</th>
-                                    <th>Profit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Stripe</td>
-                                    <td>Payment</td>
-                                    <td>4.8%</td>
-                                    <td>$12,487</td>
-                                </tr>
-                                <tr>
-                                    <td>Zapier</td>
-                                    <td>Automation</td>
-                                    <td>2.4%</td>
-                                    <td>$8,234</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Other Pages (initially hidden) -->
-            <div class="page" id="payment">
-                <h1 class="page-title">Payment</h1>
-                <p>Payment management content goes here.</p>
-            </div>
-            
-            <div class="page" id="customers">
-                <h1 class="page-title">Customers</h1>
-                <p>Customer management content goes here.</p>
-            </div>
-            
-            <div class="page" id="message">
-                <h1 class="page-title">Message</h1>
-                <p>Message management content goes here.</p>
-            </div>
-            
-            <!-- Add other pages similarly -->
+  <main class="main">
+    <div class="top">
+      <div>
+        <h2 style="margin:0">AI on this PC — Live</h2>
+        <div class="small">Realtime overview of usage, requests and past activity</div>
+      </div>
+      <div class="controls">
+        <div class="stat-row">
+          <div class="chip" id="uptimeChip">Uptime: 0h</div>
+          <div class="chip" id="reqChip">Requests: 0</div>
         </div>
-    </main>
+        <button class="btn" id="exportCsv">Export CSV</button>
+        <button class="btn ghost" id="simulate">Simulate +</button>
+      </div>
+    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation functionality
-            const navItems = document.querySelectorAll('.nav-item');
-            const pages = document.querySelectorAll('.page');
-            
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const pageId = this.getAttribute('data-page');
-                    
-                    // Update active nav item
-                    navItems.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show corresponding page
-                    pages.forEach(page => {
-                        page.classList.remove('active');
-                        if (page.id === pageId) {
-                            page.classList.add('active');
-                        }
-                    });
-                });
-            });
-            
-            // Export functionality
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                const csvContent = "data:text/csv;charset=utf-8,"
-                    + "Application,Type,Rate,Profit\n"
-                    + "Stripe,Payment,4.8%,12487\n"
-                    + "Zapier,Automation,2.4%,8234\n";
-                
-                const encodedUri = encodeURI(csvContent);
-                const link = document.createElement("a");
-                link.setAttribute("href", encodedUri);
-                link.setAttribute("download", "nexus_export.csv");
-                document.body.appendChild(link);
-                
-                link.click();
-                document.body.removeChild(link);
-            });
-            
-            // Upgrade Plan functionality
-            document.getElementById('upgradePlan').addEventListener('click', function() {
-                window.location.href = "#upgrade"; // In a real app, this would link to a payment page
-                alert("Redirecting to upgrade plan page...");
-            });
-            
-            // Draw Sales Chart
-            const salesCtx = document.getElementById('salesChart').getContext('2d');
-            drawSalesChart(salesCtx);
-            
-            // Draw Subscriber Chart
-            const subscriberCtx = document.getElementById('subscriberChart').getContext('2d');
-            drawSubscriberChart(subscriberCtx);
-            
-            // Draw Distribution Chart
-            const distributionCtx = document.getElementById('distributionChart').getContext('2d');
-            drawDistributionChart(distributionCtx);
-            
-            // Chart drawing functions
-            function drawSalesChart(ctx) {
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-                const countries = {
-                    'China': [120, 140, 160, 180, 190, 210],
-                    'UE': [80, 90, 100, 110, 120, 130],
-                    'USA': [70, 85, 95, 105, 115, 125],
-                    'Canada': [40, 50, 60, 70, 80, 90],
-                    'Other': [60, 70, 80, 90, 100, 110]
-                };
-                
-                const colors = {
-                    'China': '#4285F4',
-                    'UE': '#34A853',
-                    'USA': '#EA4335',
-                    'Canada': '#FBBC05',
-                    'Other': '#9AA0A6'
-                };
-                
-                const barWidth = 10;
-                const groupWidth = 60;
-                const padding = 20;
-                const chartHeight = 280;
-                const chartWidth = months.length * groupWidth + padding * 2;
-                
-                // Set canvas size
-                ctx.canvas.width = chartWidth;
-                
-                // Draw axes
-                ctx.beginPath();
-                ctx.moveTo(padding, padding);
-                ctx.lineTo(padding, chartHeight);
-                ctx.lineTo(chartWidth - padding, chartHeight);
-                ctx.strokeStyle = '#DADCE0';
-                ctx.stroke();
-                
-                // Draw month labels
-                months.forEach((month, i) => {
-                    ctx.fillStyle = '#5F6368';
-                    ctx.font = '12px Roboto';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(month, padding + i * groupWidth + groupWidth/2, chartHeight + 15);
-                });
-                
-                // Find max value for scaling
-                let maxValue = 0;
-                for (const country in countries) {
-                    maxValue = Math.max(maxValue, ...countries[country]);
-                }
-                
-                // Draw bars for each country
-                const countryCount = Object.keys(countries).length;
-                Object.keys(countries).forEach((country, countryIndex) => {
-                    const countryData = countries[country];
-                    
-                    countryData.forEach((value, monthIndex) => {
-                        const barHeight = (value / maxValue) * (chartHeight - padding * 2);
-                        const x = padding + monthIndex * groupWidth + countryIndex * barWidth;
-                        const y = chartHeight - barHeight;
-                        
-                        ctx.fillStyle = colors[country];
-                        ctx.fillRect(x, y, barWidth, barHeight);
-                    });
-                });
-                
-                // Draw legend
-                let legendX = padding;
-                Object.keys(countries).forEach((country, i) => {
-                    ctx.fillStyle = colors[country];
-                    ctx.fillRect(legendX, 10, 10, 10);
-                    
-                    ctx.fillStyle = '#202124';
-                    ctx.font = '12px Roboto';
-                    ctx.textAlign = 'left';
-                    ctx.fillText(country, legendX + 15, 18);
-                    
-                    legendX += ctx.measureText(country).width + 30;
-                });
-            }
-            
-            function drawSubscriberChart(ctx) {
-                const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                const subscribers = [120, 150, 180, 90, 210, 160, 140];
-                
-                const padding = 20;
-                const chartHeight = 280;
-                const chartWidth = days.length * 40 + padding * 2;
-                const barWidth = 20;
-                
-                // Set canvas size
-                ctx.canvas.width = chartWidth;
-                
-                // Draw axes
-                ctx.beginPath();
-                ctx.moveTo(padding, padding);
-                ctx.lineTo(padding, chartHeight);
-                ctx.lineTo(chartWidth - padding, chartHeight);
-                ctx.strokeStyle = '#DADCE0';
-                ctx.stroke();
-                
-                // Draw day labels
-                days.forEach((day, i) => {
-                    ctx.fillStyle = '#5F6368';
-                    ctx.font = '12px Roboto';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(day, padding + i * 40 + 20, chartHeight + 15);
-                });
-                
-                // Find max value for scaling
-                const maxValue = Math.max(...subscribers);
-                
-                // Draw bars
-                subscribers.forEach((value, i) => {
-                    const barHeight = (value / maxValue) * (chartHeight - padding * 2);
-                    const x = padding + i * 40 + 10;
-                    const y = chartHeight - barHeight;
-                    
-                    // Create gradient
-                    const gradient = ctx.createLinearGradient(0, y, 0, chartHeight);
-                    gradient.addColorStop(0, '#4285F4');
-                    gradient.addColorStop(1, '#34A853');
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(x, y, barWidth, barHeight);
-                    
-                    // Draw value on top of bar
-                    ctx.fillStyle = '#202124';
-                    ctx.font = '12px Roboto';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(value, x + barWidth/2, y - 5);
-                });
-            }
-            
-            function drawDistributionChart(ctx) {
-                const data = [
-                    { label: 'China', value: 30, color: '#4285F4' },
-                    { label: 'UE', value: 25, color: '#34A853' },
-                    { label: 'USA', value: 20, color: '#EA4335' },
-                    { label: 'Canada', value: 15, color: '#FBBC05' },
-                    { label: 'Other', value: 10, color: '#9AA0A6' }
-                ];
-                
-                const total = data.reduce((sum, item) => sum + item.value, 0);
-                let startAngle = 0;
-                const radius = 120;
-                const centerX = ctx.canvas.width / 2;
-                const centerY = ctx.canvas.height / 2;
-                
-                // Draw pie chart
-                data.forEach(item => {
-                    const sliceAngle = (item.value / total) * 2 * Math.PI;
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-                    ctx.closePath();
-                    
-                    ctx.fillStyle = item.color;
-                    ctx.fill();
-                    
-                    startAngle += sliceAngle;
-                });
-                
-                // Draw legend
-                let legendX = centerX - 100;
-                let legendY = centerY + radius + 30;
-                
-                data.forEach((item, i) => {
-                    ctx.fillStyle = item.color;
-                    ctx.fillRect(legendX, legendY, 10, 10);
-                    
-                    ctx.fillStyle = '#202124';
-                    ctx.font = '12px Roboto';
-                    ctx.textAlign = 'left';
-                    ctx.fillText(`${item.label} (${item.value}%)`, legendX + 15, legendY + 9);
-                    
-                    legendX += 100;
-                    if (i === 2) {
-                        legendX = centerX - 100;
-                        legendY += 20;
-                    }
-                });
-            }
-        });
-    </script>
+    <!-- quick cards -->
+    <div class="cards">
+      <div class="card">
+        <div class="label">Active model</div>
+        <div class="value" id="modelName">gpt-local-1</div>
+        <div class="small">Version <span id="modelVer">v1.2.0</span> · <span id="device">CPU</span></div>
+      </div>
+      <div class="card">
+        <div class="label">Total requests</div>
+        <div class="value" id="totalReq">0</div>
+        <div class="small">Avg latency: <span id="avgLatency">—</span> ms</div>
+      </div>
+      <div class="card">
+        <div class="label">Active sessions</div>
+        <div class="value" id="sessions">0</div>
+        <div class="small">Unique users/devices: <span id="uniqueClients">0</span></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- left: charts + history -->
+      <div>
+        <div class="panel">
+          <h3>Requests — last 60 minutes</h3>
+          <canvas id="reqChart"></canvas>
+          <div style="display:flex;justify-content:space-between;margin-top:8px">
+            <div class="small">Shows per-minute requests</div>
+            <div class="small">Peak: <strong id="peak">0</strong>/min</div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:12px">
+          <h3>Recent queries</h3>
+          <div class="searchline">
+            <input type="search" id="qSearch" placeholder="Search queries or filter by user..." />
+            <select id="filterModel"><option value="">All models</option><option>gpt-local-1</option><option>gpt-2mini</option></select>
+            <button class="btn ghost" id="anonToggle">Anonymize: OFF</button>
+          </div>
+          <div style="max-height:260px;overflow:auto">
+            <table id="historyTable" aria-live="polite">
+              <thead><tr><th>Time</th><th>Client</th><th>Prompt / Query</th><th>Latency ms</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: resources + features -->
+      <div>
+        <div class="panel">
+          <h3>System resources</h3>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="flex:1">
+              <div class="small">CPU usage</div>
+              <canvas id="cpuChart" style="height:80px"></canvas>
+            </div>
+            <div style="flex:1">
+              <div class="small">Memory usage</div>
+              <canvas id="memChart" style="height:80px"></canvas>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <div class="small">Model load: <strong id="modelLoad">12%</strong></div>
+            <div class="small">Disk cache: <strong id="diskCache">1.6GB</strong></div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:12px">
+          <h3>Useful actions</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button class="btn" id="clearHistory">Clear History</button>
+            <button class="btn ghost" id="resetStats">Reset Stats</button>
+            <label class="small"><input type="checkbox" id="persistToggle"> Persist logs to disk (demo)</label>
+            <div class="small muted">Tip: Connect real metrics via a small agent that posts JSON to this page.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+/* ---------------------------
+  Simple local monitor simulation
+  Replace simulated parts with real metrics easily:
+  - push new events into `addRequest({client, prompt, latency, model})`
+  - update system metrics via updateSystem({...})
+----------------------------*/
+
+const state = {
+  uptimeMin: 0,
+  requests: [],
+  totals: {count:0, latencySum:0},
+  perMinute: new Array(60).fill(0),
+  cpuSamples: [],
+  memSamples: [],
+  anon:false
+};
+
+const $ = id => document.getElementById(id);
+const tbody = document.querySelector('#historyTable tbody');
+const uptimeChip = $('uptimeChip'), reqChip = $('reqChip');
+const totalReq = $('totalReq'), avgLatency = $('avgLatency'), sessions = $('sessions'), uniqueClients = $('uniqueClients');
+const peakEl = $('peak'), modelName = $('modelName'), modelVer = $('modelVer'), deviceEl = $('device');
+const modelLoad = $('modelLoad'), diskCache = $('diskCache');
+const anonToggle = $('anonToggle');
+
+// helpers
+function formatTime(d){ const t = new Date(d); return t.toLocaleTimeString();}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+
+/* Add request event */
+function addRequest({client='local', prompt='(empty)', latency=120, model='gpt-local-1', ts=Date.now()}){
+  state.requests.unshift({client,prompt,latency,model,ts});
+  if(state.requests.length>500) state.requests.pop();
+  state.totals.count += 1;
+  state.totals.latencySum += latency;
+  // per-minute slot
+  const now = Math.floor(Date.now()/60000)%60;
+  state.perMinute[now] = (state.perMinute[now]||0)+1;
+  // sessions & clients
+  render();
+}
+
+/* Update resource samples */
+function sampleResources(){
+  // simulated CPU/MEM usage
+  const cpu = clamp(10 + Math.round(Math.random()*60 + (state.totals.count%10)), 3, 98);
+  const mem = clamp(20 + Math.round(Math.random()*60), 10, 98);
+  state.cpuSamples.push(cpu); if(state.cpuSamples.length>60) state.cpuSamples.shift();
+  state.memSamples.push(mem); if(state.memSamples.length>60) state.memSamples.shift();
+  modelLoad.textContent = `${clamp(Math.round(cpu/6),3,99)}%`;
+  diskCache.textContent = `${(1.5 + (state.totals.count%40)*0.02).toFixed(2)}GB`;
+}
+
+/* UI render */
+function render(){
+  uptimeChip.textContent = `Uptime: ${Math.floor(state.uptimeMin/60)}h ${state.uptimeMin%60}m`;
+  reqChip.textContent = `Requests: ${state.totals.count}`;
+  totalReq.textContent = state.totals.count;
+  avgLatency.textContent = state.totals.count ? Math.round(state.totals.latencySum/state.totals.count) : '—';
+  sessions.textContent = new Set(state.requests.map(r=>r.client)).size;
+  uniqueClients.textContent = new Set(state.requests.map(r=>r.client)).size;
+  peakEl.textContent = Math.max(...state.perMinute);
+
+  // history table (first 50)
+  const search = document.getElementById('qSearch').value.toLowerCase();
+  const modelFilter = document.getElementById('filterModel').value;
+  tbody.innerHTML = '';
+  for(const r of state.requests.slice(0,200)){
+    if(modelFilter && r.model!==modelFilter) continue;
+    if(search && !(r.prompt.toLowerCase().includes(search) || r.client.toLowerCase().includes(search))) continue;
+    const tr = document.createElement('tr');
+    const client = state.anon ? anonymizeClient(r.client) : r.client;
+    tr.innerHTML = `<td class="small">${formatTime(r.ts)}</td>
+                    <td>${client}</td>
+                    <td style="max-width:340px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(r.prompt)}</td>
+                    <td class="small">${r.latency}</td>`;
+    tbody.appendChild(tr);
+  }
+  // draw charts
+  drawReqChart();
+  drawMiniChart('cpuChart', state.cpuSamples, {max:100});
+  drawMiniChart('memChart', state.memSamples, {max:100, color:'#34A853'});
+}
+
+/* small util */
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c])}
+function anonymizeClient(name){ return name.replace(/(.).+/, '$1***'); }
+
+/* draw requests chart on canvas */
+function drawReqChart(){
+  const canvas = document.getElementById('reqChart');
+  const ctx = canvas.getContext('2d');
+  // ensure pixel ratio
+  const w = canvas.clientWidth, h = 180;
+  canvas.width = w * devicePixelRatio; canvas.height = h * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  ctx.clearRect(0,0,w,h);
+
+  const data = [];
+  // convert perMinute to ordered last 60
+  const nowIdx = Math.floor(Date.now()/60000)%60;
+  for(let i=0;i<60;i++){
+    const idx = (nowIdx + 1 + i) % 60;
+    data.push(state.perMinute[idx] || 0);
+  }
+  const max = Math.max(5, ...data);
+  // background grid
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle = '#eef2f6'; ctx.lineWidth = 1;
+  for(let i=0;i<=4;i++){
+    const y = (h/4)*i; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+  }
+
+  // area gradient
+  const grad = ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0, 'rgba(66,133,244,0.18)');
+  grad.addColorStop(1, 'rgba(66,133,244,0.02)');
+  // path
+  ctx.beginPath();
+  data.forEach((v,i)=>{
+    const x = (w/59)*i;
+    const y = h - (v/max) * (h-20);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.lineTo(w,h); ctx.lineTo(0,h); ctx.closePath();
+  ctx.fillStyle = grad; ctx.fill();
+
+  // stroke line
+  ctx.beginPath();
+  ctx.moveTo(0, h - (data[0]/max)*(h-20));
+  data.forEach((v,i)=> ctx.lineTo((w/59)*i, h - (v/max)*(h-20)));
+  ctx.strokeStyle = '#2B6CE6'; ctx.lineWidth = 2.2; ctx.stroke();
+}
+
+/* draw tiny sparkline */
+function drawMiniChart(id, arr, opts={}){
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext('2d');
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  canvas.width = w*devicePixelRatio; canvas.height = h*devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  ctx.clearRect(0,0,w,h);
+  const data = arr.slice(-60);
+  if(data.length===0) return;
+  const max = opts.max || Math.max(...data);
+  ctx.beginPath();
+  data.forEach((v,i)=>{
+    const x = (w/(data.length-1))*i;
+    const y = h - (v/max)*(h-8) - 4;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle = opts.color || '#2B6CE6'; ctx.lineWidth = 2; ctx.stroke();
+}
+
+/* ticking */
+setInterval(()=>{
+  state.uptimeMin++;
+  sampleResources();
+  // decay perMinute (every minute should be rotated by minute tick) -> handled by using index
+  // simulated small background traffic occasionally
+  if(Math.random() < 0.3) {
+    const clients = ['local','appA','user-12','service-B','devbox'];
+    addRequest({client:clients[Math.floor(Math.random()*clients.length)],
+                prompt:['Summarize log','Translate text','Write SQL','Explain error','Generate email'][Math.floor(Math.random()*5)],
+                latency: Math.round(50 + Math.random()*300),
+                model: Math.random()<0.8 ? 'gpt-local-1' : 'gpt-2mini'});
+  }
+  render();
+}, 60000); // every minute
+
+/* demo simulate button adds burst */
+document.getElementById('simulate').addEventListener('click', ()=>{
+  for(let i=0;i<6;i++){
+    addRequest({
+      client: `user-${Math.floor(Math.random()*60)}`,
+      prompt: ['What is AI?','Optimize this code','Write a poem','How to cook rice?','Explain regex'][Math.floor(Math.random()*5)],
+      latency: Math.round(40 + Math.random()*400),
+      model: Math.random()<0.7 ? 'gpt-local-1' : 'gpt-2mini',
+      ts: Date.now() - Math.floor(Math.random()*60000)
+    });
+  }
+  // add CPU/mem burst
+  state.cpuSamples.push(clamp(40 + Math.round(Math.random()*40),5,99));
+  state.memSamples.push(clamp(40 + Math.round(Math.random()*40),10,99));
+  render();
+});
+
+/* export CSV */
+document.getElementById('exportCsv').addEventListener('click', ()=>{
+  const rows = [['time','client','model','prompt','latency_ms']];
+  for(const r of state.requests){
+    rows.push([new Date(r.ts).toISOString(), r.client, r.model, r.prompt.replace(/\n/g,' '), r.latency]);
+  }
+  const csv = rows.map(r=>r.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'ai_local_requests.csv'; a.click(); URL.revokeObjectURL(url);
+});
+
+/* clear/reset */
+document.getElementById('clearHistory').addEventListener('click', ()=>{ state.requests=[]; render();});
+document.getElementById('resetStats').addEventListener('click', ()=>{ state.totals={count:0,latencySum:0}; state.perMinute = new Array(60).fill(0); state.cpuSamples=[]; state.memSamples=[]; render();});
+
+/* search/filter/anon */
+document.getElementById('qSearch').addEventListener('input', render);
+document.getElementById('filterModel').addEventListener('change', render);
+anonToggle.addEventListener('click', ()=>{
+  state.anon = !state.anon;
+  anonToggle.textContent = `Anonymize: ${state.anon ? 'ON' : 'OFF'}`;
+  anonToggle.classList.toggle('active', state.anon);
+  render();
+});
+
+/* nav pages (simple show/hide) */
+document.querySelectorAll('#nav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#nav button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    // for demo: only switch visual hint — could implement full routing
+    const page = btn.dataset.page;
+    // we highlight different panels depending on page
+    if(page==='history') document.querySelector('#qSearch').focus();
+  });
+});
+
+/* seed initial demo data */
+(function seed(){
+  modelName.textContent = 'gpt-local-1';
+  modelVer.textContent = 'v1.2.0';
+  deviceEl.textContent = 'CPU';
+  for(let i=0;i<120;i++){
+    const clients = ['local','appA','user-12','service-B','devbox'];
+    addRequest({client:clients[Math.floor(Math.random()*clients.length)],
+                prompt:['Summarize log','Translate text','Write SQL','Explain error','Generate email'][Math.floor(Math.random()*5)],
+                latency: Math.round(40 + Math.random()*400),
+                model: Math.random()<0.85 ? 'gpt-local-1' : 'gpt-2mini',
+                ts: Date.now() - Math.floor(Math.random()*1000*60*120)
+              });
+  }
+  // populate samples
+  for(let i=0;i<30;i++){ sampleResources(); state.uptimeMin += 10; }
+  render();
+})();
+</script>
 </body>
 </html>
