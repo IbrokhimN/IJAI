@@ -1,1 +1,17 @@
+appId: com.ijai.dashboard
+productName: IJAI Dashboard
+directories:
+  output: dist
+files:
+  - "!node_modules"
+  - "src/**/*"
+  - "main.js"
+  - "preload.js"
+  - "package.json"
+win:
+  icon: src/icons/IJAI-logo.png
+linux:
+  icon: src/icons/IJAI-logo.png
+mac:
+  icon: src/icons/IJAI-logo.png
 
