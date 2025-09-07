@@ -1,1 +1,13 @@
+:root {
+  --p:#4285F4; --g:#34A853; --bg:#F6F7FB; --card:#fff; --muted:#5F6368;
+  --shadow:0 6px 18px rgba(18,38,63,0.08); --radius:12px; --gap:16px;
+}
+
+* { box-sizing:border-box; margin:0; padding:0 }
+html,body { height:100%; background:var(--bg); font-family:'Roboto',sans-serif; }
+
+.app { display:flex; min-height:100vh; gap:var(--gap); }
+.sidebar { width:240px; background:var(--card); box-shadow:var(--shadow); }
+.main { flex:1; padding:20px; display:flex; flex-direction:column; gap:16px; }
+
 
