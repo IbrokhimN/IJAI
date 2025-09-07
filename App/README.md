@@ -1,4 +1,4 @@
-# My Electron Dashboard
+# Electron based Dashboard
 
 A cross-platform desktop dashboard built with [Electron](https://www.electronjs.org/), HTML, CSS (Material-inspired), and JavaScript.  
 Provides a clean and responsive user interface with Google-like Material Design vibes.  
