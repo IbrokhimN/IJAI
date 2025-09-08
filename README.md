@@ -12,3 +12,6 @@ This folder contains the complete collection of raw data, reference files, and a
 
 Stay tuned on our Telegram channel:  
 [t.me/IJAIprj](https://t.me/IJAIprj)
+
+
+## All the ai models will be sent on tg channel
