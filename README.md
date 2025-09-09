@@ -3,7 +3,7 @@
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
 [![License](https://img.shields.io/badge/license-AGPLv3-blue)]()
-[![Platform](https://img.shields.io/badge/platform-Electron%20%2B%20React-lightgrey)]()
+[![Platform](https://img.shields.io/badge/platform-Electron-blue)]()
 [![Models](https://img.shields.io/badge/models-LLM%2C%20STT%2C%20TTS-orange)]()
 [![Join Us](https://img.shields.io/badge/chat-Telegram-blue?logo=telegram)](https://t.me/IJAIprj)
 
