@@ -125,7 +125,7 @@ flowchart LR
     C3[policies.yaml]
 
     %% === UI & PLUGINS ===
-    U1[Electron + React UI]
+    U1[Electron]
     P1[Weather Plugin OpenAPI]
 
     %% === FLOWS ===
