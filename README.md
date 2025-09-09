@@ -125,32 +125,58 @@ share/lexicons/       – Lexicon resources
 
 ## System Architecture
 ```mermaid
-flowchart LR
-    %% === DATASETS ===
-    D1[LLM corpora]
-    D2[STT transcripts]
-    D3[TTS voices]
+flowchart TB
+    %% === SYSTEM CHECK ===
+    SYS[System Profiler: CPU GPU RAM]
 
-    %% === MODELS ===
-    M1[CodeLLM / CodeLLaMA]
-    M2[DeepSeek R1]
-    M3[GPT-Neo and GPT-2]
-    M4[LLaMA 3]
-    M5[Phi-3 Mini]
-    M6[Whisper Small STT]
-    M7[TTS Small]
-    M8[Vocoder]
+    %% === OPTIMIZATION PIPELINE ===
+    OPT[Auto Configurator: Quantization + Model Selection]
+    BENCH[Benchmark Runner: Tokens per sec]
+    DEPLOY[Runtime Deployment: Optimized Models]
+
+    %% === RAW MODELS ===
+    subgraph RAW [Raw Models]
+        M1[CodeLLM or CodeLLaMA]
+        M2[DeepSeek R1]
+        M3[GPT-Neo and GPT-2]
+        M4[LLaMA-3]
+        M5[Phi-3 Mini]
+        M6[Whisper Small STT]
+        M7[TTS Small]
+        M8[Vocoder]
+    end
+
+    %% === DATASETS ===
+    subgraph DATA [Datasets]
+        D1[LLM corpora]
+        D2[STT transcripts]
+        D3[TTS voices]
+    end
 
     %% === CONFIGS ===
-    C1[assistant.conf.yaml]
-    C2[models.conf.json]
-    C3[policies.yaml]
+    subgraph CFG [Configuration Layer]
+        C1[assistant.conf.yaml]
+        C2[models.conf.json]
+        C3[policies.yaml]
+    end
+
+    %% === RUNTIME SERVICES ===
+    subgraph RUNTIME [Runtime Services]
+        MON[Monitoring and Logging]
+        SEC[Policy Engine]
+        API[Runtime API]
+    end
 
     %% === UI & PLUGINS ===
-    U1[Electron]
-    P1[Weather Plugin OpenAPI]
+    subgraph UI [User Interface]
+        U1[Electron Desktop UI]
+        P1[Plugins: Weather etc]
+    end
 
     %% === FLOWS ===
+    SYS --> OPT --> BENCH --> DEPLOY
+
+    %% DATA → RAW MODELS
     D1 --> M1
     D1 --> M2
     D1 --> M3
@@ -159,22 +185,34 @@ flowchart LR
     D2 --> M6
     D3 --> M7 --> M8
 
-    M1 --> C2
-    M2 --> C2
-    M3 --> C2
-    M4 --> C2
-    M5 --> C2
-    M6 --> C2
-    M8 --> C2
+    %% RAW MODELS → OPTIMIZER
+    M1 --> OPT
+    M2 --> OPT
+    M3 --> OPT
+    M4 --> OPT
+    M5 --> OPT
+    M6 --> OPT
+    M7 --> OPT
+    M8 --> OPT
 
-    C1 --> U1
-    C2 --> U1
-    C3 --> U1
+    %% OPTIMIZED DEPLOY → RUNTIME SERVICES
+    DEPLOY --> API
+    DEPLOY --> MON
+    DEPLOY --> SEC
 
+    %% CONFIGS
+    C1 --> API
+    C2 --> API
+    C3 --> SEC
+
+    %% UI LAYER
+    U1 --> API
+    U1 --> MON
+    U1 --> SEC
     U1 --> P1
+    P1 --> API
 
 ```
-
 
 
 ## Configuration
