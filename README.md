@@ -26,6 +26,8 @@ It provides a unified environment for **model management, dataset handling, conf
 
 ---
 
+
+
 ## Repository Structure
 
 ```
@@ -38,6 +40,7 @@ share/lexicons/       – Lexicon resources
 ```
 
 ---
+
 
 ## File Overview
 
@@ -107,6 +110,18 @@ share/lexicons/       – Lexicon resources
 | **.gitignore**                                                | Git ignore rules                               |
 
 ---
+
+## 📊 Benchmarks (LLM Inference Speed)
+
+| Model         | Params | GPU (RTX 2080s) | CPU (i7-10700) |
+|---------------|--------|-----------------|----------------|
+| Phi-3 Mini    | 3.8B   | ~45 tok/s       | ~6 tok/s       |
+| LLaMA 3       | 8B     | ~22 tok/s       | ~3 tok/s       |
+| DeepSeek R1   | 7B     | ~25 tok/s       | ~3.5 tok/s     |
+| CodeLLaMA     | 7B     | ~24 tok/s       | ~3.2 tok/s     |
+| GPT-Neo       | 2.7B   | ~40 tok/s       | ~5.5 tok/s     |
+| GPT-2 XL      | 1.5B   | ~60 tok/s       | ~8 tok/s       |
+
 
 ## System Architecture
 ```mermaid
