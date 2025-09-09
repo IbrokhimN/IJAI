@@ -1,9 +1,10 @@
+import os
 import subprocess
-from ollama import Ollama
+import ollama
 
 class DeepSeekR1:
     def __init__(self):
-        self.ollama = Ollama()
+        # Используем точное имя скачанной модели
         self.model_name = "deepseek-r1:8b"
         if not self._model_exists():
             print(f"Модель {self.model_name} не найдена. Запускаем installer.sh ...")
@@ -13,21 +14,28 @@ class DeepSeekR1:
 
     def _model_exists(self) -> bool:
         try:
-            models = self.ollama.list()
-            model_names = [m.name for m in models]
-            return self.model_name in model_names
-        except Exception:
+            models = ollama.list()
+            # Проверяем, встречается ли имя модели в любом элементе кортежа
+            return any(self.model_name in str(m) for m in models)
+        except Exception as e:
+            print(f"Ошибка при проверке модели: {e}")
             return False
 
     def _run_installer(self):
         try:
+            # Делаем скрипт исполняемым
+            os.chmod("./installer.sh", 0o755)
             subprocess.run(["./installer.sh"], check=True)
         except subprocess.CalledProcessError as e:
             print(f"Ошибка при запуске installer.sh: {e}")
 
     def response(self, prompt: str) -> str:
         try:
-            result = self.ollama.chat(model=self.model_name, prompt=prompt)
-            return result.text if hasattr(result, "text") else str(result)
+            result = ollama.chat(
+                model=self.model_name,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return result['message']['content']
         except Exception as e:
             return f"Ошибка при генерации ответа: {e}"
+
