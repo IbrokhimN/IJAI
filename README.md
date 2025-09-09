@@ -31,7 +31,7 @@ It provides a unified environment for **model management, dataset handling, conf
 ## Repository Structure
 
 ```
-App/                  – Electron + React application
+App/                  – Electron 
 IJAI-configs/         – Assistant and model configurations
 dataset/              – Datasets for LLM, STT, and TTS
 models/               – Integrated models and installers
