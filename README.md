@@ -106,46 +106,48 @@ share/lexicons/       – Lexicon resources
 
 ```mermaid
 flowchart LR
-    subgraph UI[Electron + React Application]
-        A[App Components: Header, Sidebar, DataTable, ChartCard]
-        B[Styles & Assets: dashboard.css, material.css, icons]
-    end
+    D1[Datasets: LLM corpora]
+    D2[Datasets: STT training text]
+    D3[Datasets: TTS voices & transcripts]
 
-    subgraph CFG[IJAI Configurations]
-        C1[assistant.conf.yaml]
-        C2[models.conf.json]
-        C3[policies.yaml]
-    end
+    M1[CodeLLM / CodeLLaMA]
+    M2[DeepSeek R1]
+    M3[GPT-Neo / GPT-2]
+    M4[LLaMA 3]
+    M5[Phi-3 Mini]
+    M6[Whisper Small (STT)]
+    M7[TTS Small + Vocoder]
 
-    subgraph MODELS[Model Integrations]
-        M1[CodeLLM / CodeLLaMA]
-        M2[DeepSeek R1]
-        M3[GPT-Neo / GPT-2]
-        M4[LLaMA 3]
-        M5[Phi-3 Mini]
-        M6[Whisper Small (STT)]
-        M7[TTS Small + Vocoder]
-    end
+    C1[assistant.conf.yaml]
+    C2[models.conf.json]
+    C3[policies.yaml]
 
-    subgraph DATA[Datasets]
-        D1[LLM corpora: doc.md, articles, sets]
-        D2[STT training text: book1.txt]
-        D3[TTS corpora: voices, transcripts]
-    end
+    U1[Electron + React UI]
+    P1[Weather Plugin (OpenAPI)]
 
-    subgraph PLUG[Plugins]
-        P1[Weather Plugin: manifest.json, openapi.yaml]
-    end
+    %% Flows
+    D1 --> M1
+    D1 --> M2
+    D1 --> M3
+    D1 --> M4
+    D1 --> M5
+    D2 --> M6
+    D3 --> M7
 
-    %% Connections
-    UI --> CFG
-    UI --> MODELS
-    UI --> DATA
-    UI --> PLUG
+    M1 --> C2
+    M2 --> C2
+    M3 --> C2
+    M4 --> C2
+    M5 --> C2
+    M6 --> C2
+    M7 --> C2
 
-    CFG --> MODELS
-    CFG --> DATA
-    MODELS --> DATA
+    C1 --> U1
+    C2 --> U1
+    C3 --> U1
+
+    U1 --> P1
+
 
 ```
 
