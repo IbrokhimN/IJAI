@@ -107,8 +107,8 @@ share/lexicons/       – Lexicon resources
 ```mermaid
 flowchart LR
     subgraph UI[Electron + React Application]
-        A[App Components<br>(Header, Sidebar, DataTable, ChartCard)]
-        B[Styles & Assets<br>(dashboard.css, material.css, icons)]
+        A[App Components: Header, Sidebar, DataTable, ChartCard]
+        B[Styles & Assets: dashboard.css, material.css, icons]
     end
 
     subgraph CFG[IJAI Configurations]
@@ -128,13 +128,13 @@ flowchart LR
     end
 
     subgraph DATA[Datasets]
-        D1[LLM corpora<br>(doc.md, articles, sets)]
-        D2[STT training text<br>(book1.txt)]
-        D3[TTS corpora<br>(voices, transcripts)]
+        D1[LLM corpora: doc.md, articles, sets]
+        D2[STT training text: book1.txt]
+        D3[TTS corpora: voices, transcripts]
     end
 
     subgraph PLUG[Plugins]
-        P1[Weather Plugin<br>(manifest.json, openapi.yaml)]
+        P1[Weather Plugin: manifest.json, openapi.yaml]
     end
 
     %% Connections
@@ -146,6 +146,7 @@ flowchart LR
     CFG --> MODELS
     CFG --> DATA
     MODELS --> DATA
+
 ```
 
 ## Configuration
@@ -241,8 +242,4 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 * **Commercial License**: `COMMERCIAL-LICENSE.md`
 
 
-Stay tuned on our Telegram channel:  
-[t.me/IJAIprj](https://t.me/IJAIprj)
-
-
-## All the ai models will be sent on tg channel
+> Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
