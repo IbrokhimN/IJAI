@@ -102,54 +102,7 @@ share/lexicons/       – Lexicon resources
 ---
 
 
-## System Architecture
 
-```mermaid
-flowchart LR
-    D1[Datasets: LLM corpora]
-    D2[Datasets: STT training text]
-    D3[Datasets: TTS voices & transcripts]
-
-    M1[CodeLLM / CodeLLaMA]
-    M2[DeepSeek R1]
-    M3[GPT-Neo / GPT-2]
-    M4[LLaMA 3]
-    M5[Phi-3 Mini]
-    M6[Whisper Small (STT)]
-    M7[TTS Small + Vocoder]
-
-    C1[assistant.conf.yaml]
-    C2[models.conf.json]
-    C3[policies.yaml]
-
-    U1[Electron + React UI]
-    P1[Weather Plugin (OpenAPI)]
-
-    %% Flows
-    D1 --> M1
-    D1 --> M2
-    D1 --> M3
-    D1 --> M4
-    D1 --> M5
-    D2 --> M6
-    D3 --> M7
-
-    M1 --> C2
-    M2 --> C2
-    M3 --> C2
-    M4 --> C2
-    M5 --> C2
-    M6 --> C2
-    M7 --> C2
-
-    C1 --> U1
-    C2 --> U1
-    C3 --> U1
-
-    U1 --> P1
-
-
-```
 
 ## Configuration
 
