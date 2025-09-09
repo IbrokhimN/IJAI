@@ -1,0 +1,74 @@
+openapi: 3.0.1
+info:
+  title: Weather Plugin API
+  description: API для получения текущей погоды и прогноза
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /weather/current:
+    get:
+      summary: Получить текущую погоду
+      description: Возвращает температуру и описание погоды для указанного города.
+      parameters:
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Название города
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  temperature:
+                    type: number
+                  description:
+                    type: string
+
+  /weather/forecast:
+    get:
+      summary: Получить прогноз погоды
+      description: Возвращает прогноз на несколько дней по указанному городу.
+      parameters:
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 3
+          description: Количество дней для прогноза
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  city:
+                    type: string
+                  forecast:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                        temperature:
+                          type: number
+                        description:
+                          type: string
