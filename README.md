@@ -111,7 +111,7 @@ share/lexicons/       – Lexicon resources
 
 ---
 
-## 📊 Benchmarks (LLM Inference Speed)
+## Benchmarks (LLM Inference Speed)
 
 | Model         | Params | GPU (RTX 2080s) | CPU (i7-10700) |
 |---------------|--------|-----------------|----------------|
