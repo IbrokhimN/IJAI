@@ -24,3 +24,8 @@ inputs = tokenizer("Hello, world!", return_tensors="pt")
 outputs = model.generate(**inputs, max_length=50)
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ```
+
+### Hardware Requirements
+
+At the current stage, running the model requires **~32 GB of RAM** for stable performance.  
+In future updates, the model will be **quantized** to significantly reduce memory usage, making it possible to run on machines with as little as **8 GB of RAM**.
