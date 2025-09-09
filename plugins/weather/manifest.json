@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Weather Plugin",
+  "name_for_model": "weather",
+  "description_for_human": "Плагин для получения текущей погоды и прогноза.",
+  "description_for_model": "Используй этот плагин для получения текущей погоды по городу или прогнозов на несколько дней.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:8000/openapi.yaml"
+  },
+  "logo_url": "http://localhost:8000/logo.png",
+  "contact_email": "support@myproject.com",
+  "legal_info_url": "http://localhost:8000/legal"
+}
