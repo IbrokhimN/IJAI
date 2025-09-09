@@ -101,6 +101,53 @@ share/lexicons/       – Lexicon resources
 
 ---
 
+
+## System Architecture
+
+```mermaid
+flowchart LR
+    subgraph UI[Electron + React Application]
+        A[App Components<br>(Header, Sidebar, DataTable, ChartCard)]
+        B[Styles & Assets<br>(dashboard.css, material.css, icons)]
+    end
+
+    subgraph CFG[IJAI Configurations]
+        C1[assistant.conf.yaml]
+        C2[models.conf.json]
+        C3[policies.yaml]
+    end
+
+    subgraph MODELS[Model Integrations]
+        M1[CodeLLM / CodeLLaMA]
+        M2[DeepSeek R1]
+        M3[GPT-Neo / GPT-2]
+        M4[LLaMA 3]
+        M5[Phi-3 Mini]
+        M6[Whisper Small (STT)]
+        M7[TTS Small + Vocoder]
+    end
+
+    subgraph DATA[Datasets]
+        D1[LLM corpora<br>(doc.md, articles, sets)]
+        D2[STT training text<br>(book1.txt)]
+        D3[TTS corpora<br>(voices, transcripts)]
+    end
+
+    subgraph PLUG[Plugins]
+        P1[Weather Plugin<br>(manifest.json, openapi.yaml)]
+    end
+
+    %% Connections
+    UI --> CFG
+    UI --> MODELS
+    UI --> DATA
+    UI --> PLUG
+
+    CFG --> MODELS
+    CFG --> DATA
+    MODELS --> DATA
+```
+
 ## Configuration
 
 * **assistant.conf.yaml** – Core assistant runtime configuration.
