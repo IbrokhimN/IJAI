@@ -1,6 +1,13 @@
 
 # IJAI Platform
 
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
+[![License](https://img.shields.io/badge/license-AGPLv3-blue)]()
+[![Platform](https://img.shields.io/badge/platform-Electron%20%2B%20React-lightgrey)]()
+[![Models](https://img.shields.io/badge/models-LLM%2C%20STT%2C%20TTS-orange)]()
+[![Join Us](https://img.shields.io/badge/chat-Telegram-blue?logo=telegram)](https://t.me/IJAIprj)
+
+
 ( Work in progress )
 
 IJAI is a modular AI platform that integrates **Large Language Models (LLM)**, **Speech-to-Text (STT)**, and **Text-to-Speech (TTS)** with a **cross-platform Electron + React desktop application**.
@@ -241,6 +248,58 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 * See `CONTRIBUTORS.md` for acknowledgments.
 
 ---
+
+
+---
+
+## Roadmap
+
+### ✅ Completed (Ready for Release)
+- [x] Core Electron ( betta version )
+- [x] LLM integration (Phi-3 Mini, GPT-Neo, LLaMA-3, DeepSeek R1)  
+- [ ] STT integration (Whisper Small)  
+- [ ] TTS pipeline (TTS Small + Vocoder)  
+- [x] Config-driven architecture (assistant, models, policies)  
+- [x] Plugin framework (OpenAPI-based, example: Weather)  
+- [x] Model installer scripts (`installer.sh`)  
+- [x] Python integration for models (`*.py` bindings)  
+- [x] Dataset ingestion (basic text/markdown corpora)  
+- [x] Tokenizer and config handling (HF-compatible)  
+- [x] Basic UI components (Sidebar, Header, DataTable, ChartCard)  
+- [x] Build system (Forge + electron-builder)  
+
+---
+
+### 🧪 Demo / Experimental
+- [ ] Model fine-tuning workflow (UI + CLI prototype)  
+- [ ] Dataset management dashboard (alpha)  
+- [ ] Interactive prompt playground for LLMs  
+- [ ] Voice cloning demo for TTS  
+- [ ] Speech-to-speech pipeline (STT → LLM → TTS)  
+- [ ] Minimal plugin marketplace (manual install)  
+
+---
+
+### 🚧 In Progress
+- [ ] Auto config saver on your flash drive
+- [ ] GPU acceleration benchmarks (CUDA / ROCm)  
+- [ ] Model caching & optimized loading (disk + RAM)  
+- [ ] Dataset versioning & tagging  
+- [ ] CLI tool (`ijai-cli`) for headless workflows  
+- [ ] Enhanced error logging & monitoring dashboard  
+- [ ] Extended plugin APIs (beyond Weather)  
+
+---
+
+### 🎯 Planned for Full Release
+- [ ] Cloud sync & model sharing  
+- [ ] Advanced policy engine (safety, filtering, sandboxing)  
+- [ ] Fine-tuning UI (drag-and-drop datasets)  
+- [ ] Multi-language UI (EN, RU, etc.)  
+- [ ] Integration with external APIs (translation, search, etc.)  
+- [ ] Plugin marketplace (in-app browsing & install)  
+- [ ] Mobile companion app (view results, run lightweight tasks)  
+
 
 ## License
 
