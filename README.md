@@ -139,6 +139,18 @@ share/lexicons/       – Lexicon resources
 
 > LLM inference on CPU works, but GPU speeds up generation significantly, especially for 7B+ models.
 
+---
+
+### Speech-to-Text (STT)
+
+| Model / Folder        | CPU      | RAM   | GPU                         | Audio Requirements        |
+| --------------------- | -------- | ----- | --------------------------- | ------------------------- |
+| **stt/Coqui**         | 4+ cores | 8 GB+ | NVIDIA CUDA GPU recommended | WAV, 16 kHz, mono         |
+| **stt/Silero**        | 4+ cores | 8 GB+ | Optional                    | WAV, 16 kHz, mono         |
+| **stt/whisper-small** | 4+ cores | 8 GB+ | GPU recommended             | WAV/OGG, 16 kHz preferred |
+
+> GPU drastically reduces transcription time for longer audio.
+
 
 
 ## System Architecture
