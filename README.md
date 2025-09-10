@@ -171,7 +171,58 @@ share/lexicons/       – Lexicon resources
 * **RAM**: At least 8 GB for small models, 16 GB+ for medium/large LLMs.
 * **Storage**: \~500 MB–2 GB per model depending on size.
 
+Понял тебя 💡 — давай сделаем **два варианта системных требований** для твоего проекта:
 
+1. **Minimal Set** — минимальный набор моделей, чтобы проект работал, но был лёгким.
+2. **Full Set** — полный набор всех моделей для максимальной функциональности.
+
+Я оформлю красиво для README.
+
+---
+
+### Minimal Set
+
+**Models included:**
+
+* LLM: `llm/gpt2-medium`
+* STT: `stt/Silero`
+* TTS: `tts/tts-small`
+* Vocoder: `vocoder`
+
+**Requirements:**
+
+| Resource       | Recommended                                                   |
+| -------------- | ------------------------------------------------------------- |
+| CPU            | 4 cores modern x86\_64                                        |
+| RAM            | 8 GB                                                          |
+| GPU (optional) | NVIDIA CUDA GPU (e.g., RTX 2060) for faster STT/TTS inference |
+| Storage        | \~1 GB for all models                                         |
+| Audio format   | WAV, 16-bit PCM, mono, 16 kHz                                 |
+
+>  Minimal set runs on CPU, but GPU improves transcription and TTS speed. Suitable for lightweight testing and small projects.
+
+---
+
+### Full Set
+
+**Models included:**
+
+* LLM: `codellm`, `codellama`, `ollama-deepseekr1:8b`, `llm/gpt-neo`, `llm/gpt2-medium`, `ollama-llama3/phi3mini`
+* STT: `stt/Coqui`, `stt/Silero`, `stt/whisper-small`
+* TTS: `tts/tts-small`
+* Vocoder: `vocoder`
+
+**Requirements:**
+
+| Resource     | Recommended                                                                           |
+| ------------ | ------------------------------------------------------------------------------------- |
+| CPU          | 8+ cores modern x86\_64                                                               |
+| RAM          | 16 GB+ (32 GB recommended for multiple LLMs)                                          |
+| GPU          | NVIDIA CUDA GPU (RTX 3060+ recommended) for smooth inference across LLM, STT, and TTS |
+| Storage      | 10+ GB depending on models downloaded                                                 |
+| Audio format | WAV/OGG, 16-bit PCM, mono, 16 kHz                                                     |
+
+> Full set allows full functionality: large LLMs, multiple STT engines, and high-quality TTS. GPU is strongly recommended for smooth experience.
 
 
 ## System Architecture
