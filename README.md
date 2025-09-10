@@ -123,6 +123,24 @@ share/lexicons/       – Lexicon resources
 | GPT-2 XL      | 1.5B   | ~60 tok/s       | ~8 tok/s       |
 
 
+
+## System Requirements
+
+### Large Language Models (LLM)
+
+| Model / Folder             | CPU      | RAM    | GPU                                         | Notes                                    |
+| -------------------------- | -------- | ------ | ------------------------------------------- | ---------------------------------------- |
+| **codellm**                | 4+ cores | 16 GB+ | Optional, recommended for 8B+ models        | PyTorch / Ollama compatible              |
+| **codellama**              | 4+ cores | 16 GB+ | NVIDIA GPU (RTX 2060+) for smooth inference | 8-bit/16-bit quantization recommended    |
+| ollama-deepseekr1:8b       | 4+ cores | 16 GB+ | NVIDIA GPU for fast generation              | Pretrained 8B model, uses Ollama runtime |
+| **llm/gpt-neo**            | 4+ cores | 12 GB+ | GPU optional                                | Medium-sized model, PyTorch              |
+| **llm/gpt2-medium**        | 4+ cores | 8 GB+  | GPU optional                                | Classic GPT-2 medium model               |
+| **ollama-llama3/phi3mini** | 4+ cores | 12 GB+ | GPU recommended                             | Small LLaMA3 variant, fast inference     |
+
+> LLM inference on CPU works, but GPU speeds up generation significantly, especially for 7B+ models.
+
+
+
 ## System Architecture
 ```mermaid
 flowchart TB
