@@ -151,6 +151,27 @@ share/lexicons/       – Lexicon resources
 
 > GPU drastically reduces transcription time for longer audio.
 
+---
+
+### Text-to-Speech (TTS)
+
+| Model / Folder    | CPU      | RAM   | GPU                                        | Notes                                               |
+| ----------------- | -------- | ----- | ------------------------------------------ | --------------------------------------------------- |
+| **tts/tts-small** | 4+ cores | 8 GB+ | Optional, recommended for faster synthesis | Short-form TTS, PyTorch                             |
+| **vocoder**       | 4+ cores | 8 GB+ | GPU recommended                            | Converts spectrograms to waveform; optional for TTS |
+
+> For real-time or batch TTS synthesis, GPU is strongly recommended.
+
+---
+
+### General Notes
+
+* **CPU-only setups** work for all models, but expect slower inference on LLMs (7B+), STT for long audio, and TTS/vocoder.
+* **GPU**: NVIDIA CUDA-capable GPU (RTX 2060 or higher) is recommended for smooth performance.
+* **RAM**: At least 8 GB for small models, 16 GB+ for medium/large LLMs.
+* **Storage**: \~500 MB–2 GB per model depending on size.
+
+
 
 
 ## System Architecture
