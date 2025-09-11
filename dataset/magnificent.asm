@@ -3,6 +3,7 @@ section .data
     bold    db 27,"[1m",0
     reset   db 27,"[0m",0
     clear   db 27,"[2J",27,"[H",0
+    center  db 27,"[10;20H",0
 
     heart1 db "   ***     ***   ",10
            db " *****   *****  ",10
@@ -47,6 +48,12 @@ _start:
 
     mov rax, 1
     mov rdi, 1
+    mov rsi, center
+    mov rdx, 7
+    syscall
+
+    mov rax, 1
+    mov rdi, 1
     mov rsi, red
     mov rdx, 5
     syscall
@@ -77,6 +84,12 @@ _start:
     mov rax, 1
     mov rdi, 1
     mov rsi, clear
+    mov rdx, 7
+    syscall
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, center
     mov rdx, 7
     syscall
 
@@ -115,7 +128,7 @@ section .bss
     align 8
 ts1:
     dq 0
-    dq 150000000
+    dq 120000000
 ts2:
     dq 0
-    dq 150000000
+    dq 120000000
