@@ -29,3 +29,15 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 At the current stage, running the model requires **~32 GB of RAM** for stable performance.  
 In future updates, the model will be **quantized** to significantly reduce memory usage, making it possible to run on machines with as little as **8 GB of RAM**.
+
+
+
+# System Requirements for Phi-3 Small (Ollama)
+
+| Component | Minimum (for phi-3-small ~2.5–3 GB) | Recommended |
+|-----------|--------------------------------------|-------------|
+| **CPU**   | 4 cores (x86_64 / Apple Silicon M1+) | 6–8 cores |
+| **RAM**   | 6 GB (bare minimum) | 12–16 GB |
+| **GPU**   | Not required (CPU works fine) | NVIDIA GPU with 4–6 GB VRAM (e.g. GTX 1660, RTX 2060) or Apple M1/M2/M3 integrated GPU |
+| **Disk**  | 4–5 GB SSD free space | 10–15 GB SSD |
+| **OS**    | macOS (Apple Silicon) / Linux / Windows (WSL2 recommended) | Same |
