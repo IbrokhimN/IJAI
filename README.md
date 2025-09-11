@@ -433,7 +433,6 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 
 ### 🧪 Demo / Experimental
 - [ ] Model fine-tuning workflow (UI + CLI prototype)  
-- [ ] Dataset management dashboard (alpha)  
 - [ ] Interactive prompt playground for LLMs  
 - [ ] Voice cloning demo for TTS  
 - [ ] Speech-to-speech pipeline (STT → LLM → TTS)  
