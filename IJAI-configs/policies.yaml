@@ -1,0 +1,50 @@
+# first version btw
+version: 1.0
+
+assistant:
+  persona: "helpful"
+  language: "en"
+  allow_plugins: true
+  max_context_tokens: 4096
+  response_format: "markdown"
+
+policies:
+  safety:
+    enabled: true
+    filters:
+      - profanity
+      - nsfw
+      - personal_data
+      - hate_speech
+      - self_harm
+
+  datasets:
+    default: "deny"  
+    rules:
+      - dataset: "llm/*"
+        permission: "read"
+      - dataset: "stt/*"
+        permission: "read"
+      - dataset: "tts/*"
+        permission: "read"
+
+  models:
+    allowed:
+      - "ollama-llama3"
+      - "phi3mini"
+      - "whisper-small"
+      - "silero_stt"
+    denied:
+      - "gpt2-medium"  
+      - "codellm"      
+
+  plugins:
+    default: "disabled"
+    rules:
+      - plugin: "weather"
+        permission: "enabled"
+
+logging:
+  level: "INFO"
+  save_interactions: true
+  redact_sensitive: true
