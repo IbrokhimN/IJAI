@@ -466,5 +466,31 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 * **Open Source License**: `AGPLv3.0`
 * **Commercial License**: `COMMERCIAL-LICENSE.md`
 
+## Usage Policy
+
+All models, datasets, and configurations provided in this repository are released **strictly for research and educational purposes**.  
+By using this project, you agree to follow these rules:
+
+- ❌ **No malicious usage** — It is strictly forbidden to use IJAI or any of its models for harmful purposes, including but not limited to:
+  - spreading disinformation,
+  - generating hateful or violent content,
+  - surveillance or harassment,
+  - assisting in illegal activities.
+
+- ❌ **No malicious fine-tuning** — Fine-tuning IJAI models on datasets intended for harmful, discriminatory, or illegal applications is **prohibited**.
+
+- ✅ **Allowed usage** — You may use, extend, and fine-tune the models for positive, ethical, and constructive purposes such as:
+  - research,
+  - accessibility,
+  - education,
+  - productivity,
+  - creativity.
+
+---
+
+**Important:** Any violation of these policies voids your right to use or redistribute this project under its license.  
+We trust the open-source community to act responsibly and improve IJAI in ways that benefit everyone.
+
+
 
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
