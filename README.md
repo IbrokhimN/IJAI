@@ -42,7 +42,7 @@ share/lexicons/       – Lexicon resources
 ---
 
 
-## File Overview
+# ## File Overview
 
 | Path                                                                                | Description                            |
 | ----------------------------------------------------------------------------------- | -------------------------------------- |
@@ -123,21 +123,25 @@ share/lexicons/       – Lexicon resources
 | **LICENSE**                                                                         | Open source license                    |
 | **README.md**                                                                       | Main documentation                     |
 
-
 ---
 
 ## Benchmarks (LLM Inference Speed)
 
-| Model         | Params | GPU (RTX 2080s) | CPU (i7-10700) |
-|---------------|--------|-----------------|----------------|
-| Phi-3 Mini    | 3.8B   | ~45 tok/s       | ~6 tok/s       |
-| LLaMA 3       | 8B     | ~22 tok/s       | ~3 tok/s       |
-| DeepSeek R1   | 7B     | ~25 tok/s       | ~3.5 tok/s     |
-| CodeLLaMA     | 7B     | ~24 tok/s       | ~3.2 tok/s     |
-| GPT-Neo       | 2.7B   | ~40 tok/s       | ~5.5 tok/s     |
-| GPT-2 XL      | 1.5B   | ~60 tok/s       | ~8 tok/s       |
+| Model       | Params | GPU (RTX 2080s) | CPU (i7-10700) |
+| ----------- | ------ | --------------- | -------------- |
+| Phi-3 Mini  | 3.8B   | \~45 tok/s      | \~6 tok/s      |
+| LLaMA 3     | 8B     | \~22 tok/s      | \~3 tok/s      |
+| DeepSeek R1 | 7B     | \~25 tok/s      | \~3.5 tok/s    |
+| CodeLLaMA   | 7B     | \~24 tok/s      | \~3.2 tok/s    |
+| GPT-Neo     | 2.7B   | \~40 tok/s      | \~5.5 tok/s    |
+| GPT-2 XL    | 1.5B   | \~60 tok/s      | \~8 tok/s      |
+| Falcon-7B   | 7B     | \~26 tok/s      | \~3.5 tok/s    |
+| Mistral-7B  | 7B     | \~28 tok/s      | \~3.7 tok/s    |
+| Yi-6B       | 6B     | \~30 tok/s      | \~4 tok/s      |
+| OPT-6.7B    | 6.7B   | \~23 tok/s      | \~3 tok/s      |
+| StableLM-7B | 7B     | \~22 tok/s      | \~3 tok/s      |
 
-
+---
 
 ## System Requirements
 
@@ -145,47 +149,91 @@ share/lexicons/       – Lexicon resources
 
 | Model / Folder             | CPU      | RAM    | GPU                                         | Notes                                    |
 | -------------------------- | -------- | ------ | ------------------------------------------- | ---------------------------------------- |
-| **codellm**                | 4+ cores | 16 GB+ | Optional, recommended for 8B+ models        | PyTorch / Ollama compatible              |
-| **codellama**              | 4+ cores | 16 GB+ | NVIDIA GPU (RTX 2060+) for smooth inference | 8-bit/16-bit quantization recommended    |
-| ollama-deepseekr1:8b       | 4+ cores | 16 GB+ | NVIDIA GPU for fast generation              | Pretrained 8B model, uses Ollama runtime |
-| **llm/gpt-neo**            | 4+ cores | 12 GB+ | GPU optional                                | Medium-sized model, PyTorch              |
-| **llm/gpt2-medium**        | 4+ cores | 8 GB+  | GPU optional                                | Classic GPT-2 medium model               |
-| **ollama-llama3/phi3mini** | 4+ cores | 12 GB+ | GPU recommended                             | Small LLaMA3 variant, fast inference     |
-
-> LLM inference on CPU works, but GPU speeds up generation significantly, especially for 7B+ models.
+| **codellm**                | 4+ cores | 16 GB+ | Optional, recommended for 8B+ models        | PyTorch / Ollama compatible              |
+| **codellama**              | 4+ cores | 16 GB+ | NVIDIA GPU (RTX 2060+) for smooth inference | 8-bit/16-bit quantization recommended    |
+| **ollama-deepseekr1:8b**   | 4+ cores | 16 GB+ | NVIDIA GPU for fast generation              | Pretrained 8B model, uses Ollama runtime |
+| **llm/Falcon-7B**          | 4+ cores | 16 GB+ | GPU optional, faster with CUDA              | TII Falcon, strong general LLM           |
+| **llm/GPT-NeoX-20B**       | 8+ cores | 32 GB+ | High-end GPU (24 GB VRAM+) required         | Very large model, slow on CPU            |
+| **llm/Gemma**              | 4+ cores | 12 GB+ | GPU optional                                | Compact Google LLM                       |
+| **llm/LLaMA-2**            | 4+ cores | 16 GB+ | GPU recommended                             | Meta LLaMA 2 family                      |
+| **llm/MPT**                | 4+ cores | 16 GB+ | GPU optional                                | MosaicML transformer family              |
+| **llm/Mistral-7B**         | 4+ cores | 16 GB+ | GPU recommended                             | Highly efficient dense model             |
+| **llm/OPT**                | 4+ cores | 16 GB+ | GPU optional                                | Meta OPT series                          |
+| **llm/Qwen-1.5**           | 4+ cores | 16 GB+ | GPU optional                                | Multilingual Alibaba model               |
+| **llm/StableLM**           | 4+ cores | 12 GB+ | GPU optional                                | StabilityAI open family                  |
+| **llm/Yi-1.5-6B**          | 4+ cores | 16 GB+ | GPU recommended                             | Bilingual efficiency                     |
+| **llm/gpt-j-6b**           | 4+ cores | 16 GB+ | GPU optional                                | EleutherAI GPT-J classic                 |
+| **llm/gpt-neo**            | 4+ cores | 12 GB+ | GPU optional                                | EleutherAI GPT-Neo                       |
+| **llm/gpt2-medium**        | 4+ cores | 8 GB+  | GPU optional                                | Classic GPT-2 medium                     |
+| **ollama-llama3/phi3mini** | 4+ cores | 12 GB+ | GPU recommended                             | Small LLaMA3 variant                     |
 
 ---
 
 ### Speech-to-Text (STT)
 
-| Model / Folder        | CPU      | RAM   | GPU                         | Audio Requirements        |
-| --------------------- | -------- | ----- | --------------------------- | ------------------------- |
-| **stt/Coqui**         | 4+ cores | 8 GB+ | NVIDIA CUDA GPU recommended | WAV, 16 kHz, mono         |
-| **stt/Silero**        | 4+ cores | 8 GB+ | Optional                    | WAV, 16 kHz, mono         |
-| **stt/whisper-small** | 4+ cores | 8 GB+ | GPU recommended             | WAV/OGG, 16 kHz preferred |
-
-> GPU drastically reduces transcription time for longer audio.
+| Model / Folder         | CPU      | RAM   | GPU                         | Audio Requirements        |
+| ---------------------- | -------- | ----- | --------------------------- | ------------------------- |
+| **stt/Coqui**          | 4+ cores | 8 GB+ | NVIDIA CUDA GPU recommended | WAV, 16 kHz, mono         |
+| **stt/DeepSpeech**     | 4+ cores | 8 GB+ | Optional                    | WAV, 16 kHz, mono         |
+| **stt/Faster-Whisper** | 4+ cores | 8 GB+ | GPU recommended             | WAV/OGG, 16 kHz           |
+| **stt/Nemo ASR**       | 4+ cores | 8 GB+ | GPU strongly advised        | WAV, 16 kHz               |
+| **stt/Silero**         | 4+ cores | 8 GB+ | Optional                    | WAV, 16 kHz, mono         |
+| **stt/Vosk**           | 4+ cores | 4 GB+ | Optional                    | WAV, 16 kHz, mono         |
+| **stt/whisper-small**  | 4+ cores | 8 GB+ | GPU recommended             | WAV/OGG, 16 kHz preferred |
 
 ---
 
 ### Text-to-Speech (TTS)
 
-| Model / Folder    | CPU      | RAM   | GPU                                        | Notes                                               |
-| ----------------- | -------- | ----- | ------------------------------------------ | --------------------------------------------------- |
-| **tts/tts-small** | 4+ cores | 8 GB+ | Optional, recommended for faster synthesis | Short-form TTS, PyTorch                             |
-| **vocoder**       | 4+ cores | 8 GB+ | GPU recommended                            | Converts spectrograms to waveform; optional for TTS |
-
-> For real-time or batch TTS synthesis, GPU is strongly recommended.
+| Model / Folder     | CPU      | RAM   | GPU                                        | Notes                                |
+| ------------------ | -------- | ----- | ------------------------------------------ | ------------------------------------ |
+| **tts/Parler-TTS** | 4+ cores | 8 GB+ | GPU strongly recommended                   | HuggingFace Parler, realistic voices |
+| **tts/tts-small**  | 4+ cores | 8 GB+ | Optional, recommended for faster synthesis | Lightweight TTS                      |
+| **vocoder**        | 4+ cores | 8 GB+ | GPU recommended                            | Converts spectrograms to waveform    |
 
 ---
 
-### General Notes
+## Minimal Set
 
-* **CPU-only setups** work for all models, but expect slower inference on LLMs (7B+), STT for long audio, and TTS/vocoder.
-* **GPU**: NVIDIA CUDA-capable GPU (RTX 2060 or higher) is recommended for smooth performance.
-* **RAM**: At least 8 GB for small models, 16 GB+ for medium/large LLMs.
-* **Storage**: \~500 MB–2 GB per model depending on size.
+**Models included:**
 
+* LLM: `llm/gpt2-medium`
+* STT: `stt/Silero`
+* TTS: `tts/tts-small`
+* Vocoder: `vocoder`
+
+**Requirements:**
+
+| Resource       | Recommended                                             |
+| -------------- | ------------------------------------------------------- |
+| CPU            | 4 cores modern x86\_64                                  |
+| RAM            | 8 GB                                                    |
+| GPU (optional) | NVIDIA CUDA GPU (RTX 2060) for faster STT/TTS inference |
+| Storage        | \~1 GB for all models                                   |
+| Audio format   | WAV, 16-bit PCM, mono, 16 kHz                           |
+
+---
+
+## Full Set
+
+**Models included:**
+
+* **LLM**: `codellm`, `codellama`, `ollama-deepseekr1:8b`, `llm/Falcon-7B`, `llm/GPT-NeoX-20B`, `llm/Gemma`, `llm/LLaMA-2`, `llm/MPT`, `llm/Mistral-7B`, `llm/OPT`, `llm/Qwen-1.5`, `llm/StableLM`, `llm/Yi-1.5-6B`, `llm/gpt-j-6b`, `llm/gpt-neo`, `llm/gpt2-medium`, `ollama-llama3/phi3mini`
+* **STT**: `stt/Coqui`, `stt/DeepSpeech`, `stt/Faster-Whisper`, `stt/Nemo ASR`, `stt/Silero`, `stt/Vosk`, `stt/whisper-small`
+* **TTS**: `tts/Parler-TTS`, `tts/tts-small`
+* **Vocoder**: `vocoder`
+
+**Requirements:**
+
+| Resource     | Recommended                                                                           |
+| ------------ | ------------------------------------------------------------------------------------- |
+| CPU          | 8+ cores modern x86\_64                                                               |
+| RAM          | 16 GB+ (32 GB recommended for multiple LLMs)                                          |
+| GPU          | NVIDIA CUDA GPU (RTX 3060+ recommended) for smooth inference across LLM, STT, and TTS |
+| Storage      | 20+ GB depending on models downloaded                                                 |
+| Audio format | WAV/OGG, 16-bit PCM, mono, 16 kHz                                                     |
+
+---
 ### Minimal Set
 
 **Models included:**
