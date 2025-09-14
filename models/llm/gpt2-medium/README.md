@@ -34,3 +34,13 @@ pip install torch transformers
 
 *(Ensure you install the correct `torch` version that matches your CUDA setup if training on GPU.)*
 
+
+## System Requirements
+
+* At least **8 GB RAM**
+* Disk space: **\~1 GB** for GPT-2 medium + additional space for dataset and checkpoints
+* **GPU with ≥8 GB VRAM** recommended for practical training speeds (otherwise training will fall back to CPU, which is significantly slower)
+
+---
+
+The script automatically processes all `.txt` files in `dataset/`, generates `train.txt` and `eval.txt`, fine-tunes GPT-2, and saves the best model into `best_model/`.
