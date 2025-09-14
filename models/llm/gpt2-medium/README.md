@@ -19,3 +19,10 @@ project/
 
 ````
 
+
+## Requirements
+
+- **Python 3.9+**
+- **GPU with CUDA** (optional but strongly recommended for training speed)
+
+
