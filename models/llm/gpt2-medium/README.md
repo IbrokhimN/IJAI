@@ -26,3 +26,11 @@ project/
 - **GPU with CUDA** (optional but strongly recommended for training speed)
 
 
+### Python dependencies
+
+```bash
+pip install torch transformers
+````
+
+*(Ensure you install the correct `torch` version that matches your CUDA setup if training on GPU.)*
+
