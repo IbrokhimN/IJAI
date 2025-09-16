@@ -42,7 +42,7 @@ share/lexicons/       – Lexicon resources
 ---
 
 
-# ## File Overview
+## File Overview
 
 | Path                                                                                | Description                            |
 | ----------------------------------------------------------------------------------- | -------------------------------------- |
