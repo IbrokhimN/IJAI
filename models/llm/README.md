@@ -28,7 +28,7 @@ All resources are shared openly to encourage collaboration, innovation, and fair
 
 ## Access
 
-👉 All models are distributed in our **Telegram channel**.
+All models are distributed in our **Telegram channel**.
 Simply join the channel to download and stay updated with the latest additions.
 ---
 
