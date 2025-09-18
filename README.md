@@ -544,8 +544,6 @@ We trust the open-source community to act responsibly and improve IJAI in ways t
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
 > 
 
-"""
-The project is currently in the development stage, with core functionalities being implemented and tested.
-Additional features, optimizations, and refinements are planned for subsequent development phases.
-"""
+> The project is currently in the development stage, with core functionalities being implemented and tested.  
+> Additional features, optimizations, and refinements are planned for subsequent development phases.
 
