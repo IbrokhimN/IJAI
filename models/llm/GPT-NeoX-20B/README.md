@@ -56,12 +56,6 @@ pip install torch transformers peft bitsandbytes
 
 ---
 
-## License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## Acknowledgments
 
 * Built using **Hugging Face Transformers**, **PEFT**, and **bitsandbytes**.
