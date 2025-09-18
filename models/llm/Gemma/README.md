@@ -6,6 +6,8 @@
 
 ---
 
+( Work in progress )
+
 ## Overview
 
 This project provides a framework for **fine-tuning the Gemma language model** using **LoRA (Low-Rank Adaptation)** and **4-bit quantization**.
