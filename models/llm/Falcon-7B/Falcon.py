@@ -8,9 +8,13 @@ from transformers import (
     TextDataset,
     DataCollatorForLanguageModeling,
 )
+from peft import LoraConfig, get_peft_model
 
 DATASET_DIR = "dataset"
-assert os.path.exists(DATASET_DIR), f"❌ Folder {DATASET_DIR} not found"
+OUTPUT_DIR = "./best_model"
+
+if not os.path.exists(DATASET_DIR):
+    raise FileNotFoundError(f"❌ Folder {DATASET_DIR} not found")
 
 all_texts = []
 for fname in os.listdir(DATASET_DIR):
@@ -20,10 +24,10 @@ for fname in os.listdir(DATASET_DIR):
             text = f.read().strip()
             if text:
                 all_texts.append(text)
-                print(f"✅ Loaded {fname} ({len(text.split())} words)")
+                print(f"Loaded {fname} ({len(text.split())} words)")
 
 if not all_texts:
-    raise ValueError("❌ No texts found in dataset/")
+    raise ValueError("No texts found in dataset/")
 
 full_text = "\n\n".join(all_texts)
 train_path = "train.txt"
@@ -35,35 +39,38 @@ with open(train_path, "w", encoding="utf-8") as f:
 with open(eval_path, "w", encoding="utf-8") as f:
     f.write(full_text[split:])
 
-print(f"📂 train.txt and eval.txt created (total {len(full_text.split())} words)")
+print(f"train.txt and eval.txt created (total {len(full_text.split())} words)")
 
 model_name = "tiiuae/falcon-7b"
+
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
-    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-    device_map="auto",  
+    load_in_4bit=True,
+    device_map="auto",
+    torch_dtype=torch.float16,
 )
-
+lora_config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+model = get_peft_model(model, lora_config)
 def load_dataset(file_path, tokenizer, block_size=512):
-    return TextDataset(
-        tokenizer=tokenizer,
-        file_path=file_path,
-        block_size=block_size,
-    )
+    return TextDataset(tokenizer=tokenizer, file_path=file_path, block_size=block_size)
 
 train_dataset = load_dataset(train_path, tokenizer)
 eval_dataset = load_dataset(eval_path, tokenizer)
 
-data_collator = DataCollatorForLanguageModeling(
-    tokenizer=tokenizer,
-    mlm=False,
-)
+data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
 training_args = TrainingArguments(
-    output_dir="./falcon-7b-finetuned",
+    output_dir=OUTPUT_DIR,
     overwrite_output_dir=True,
     num_train_epochs=2,
     per_device_train_batch_size=1,
@@ -76,7 +83,7 @@ training_args = TrainingArguments(
     learning_rate=5e-5,
     warmup_steps=200,
     save_total_limit=2,
-    fp16=torch.cuda.is_available(),
+    fp16=True,
     report_to="none",
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss",
@@ -93,8 +100,7 @@ trainer = Trainer(
 )
 
 trainer.train()
+model.save_pretrained(OUTPUT_DIR)
+tokenizer.save_pretrained(OUTPUT_DIR)
 
-trainer.save_model("./best_model")
-tokenizer.save_pretrained("./best_model")
-
-print("🎉 Training complete, best model saved in ./best_model")
+print(f"Training complete, model saved in {OUTPUT_DIR}")
