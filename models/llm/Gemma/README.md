@@ -68,12 +68,6 @@ Ensure that the repository is publicly accessible or that you have proper authen
 
 ---
 
-## License
-
-This project is licensed under the **AGPlv3.0 License**.
-
----
-
 ## Acknowledgments
 
 * Built using **Hugging Face Transformers**, **PEFT**, and **bitsandbytes**.
