@@ -14,7 +14,7 @@ DATASET_DIR = "dataset"
 OUTPUT_DIR = "./best_model"
 
 if not os.path.exists(DATASET_DIR):
-    raise FileNotFoundError(f"❌ Folder {DATASET_DIR} not found")
+    raise FileNotFoundError(f"Folder {DATASET_DIR} not found")
 
 all_texts = []
 for fname in os.listdir(DATASET_DIR):
