@@ -11,3 +11,8 @@ We’ve uploaded the **Phi-3 Mini** model in **GGUF format** to our **TGK**.
 ---
 
 🔗 Available now in **TGK**
+
+
+
+## Important note!
+If you want to write your own version on **phi3usage.py** you have to install .gguf model
