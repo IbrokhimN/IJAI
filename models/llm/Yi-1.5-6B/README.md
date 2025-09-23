@@ -13,3 +13,5 @@ We’ve uploaded the **Yi-1.5 Chat** model in **GGUF format** to our **TGK**.
 🔗 Available now in **TGK**  
 
 
+## Important note!
+If you want to write your own version of **yiusage.py** you have to install a **.gguf** model
