@@ -8,24 +8,33 @@
   <a href="#"><img src="https://img.shields.io/badge/Models-LLM·STT·TTS-orange?style=for-the-badge&logo=opencv" alt="Models"></a>
   <a href="https://t.me/IJAIprj"><img src="https://img.shields.io/badge/Chat-Telegram-blue?style=for-the-badge&logo=telegram" alt="Telegram"></a>
 </p>
-
-( Work in progress )
-
-IJAI is a modular AI platform that integrates **Large Language Models (LLM)**, **Speech-to-Text (STT)**, and **Text-to-Speech (TTS)** with a **cross-platform Electron + React desktop application**.
-It provides a unified environment for **model management, dataset handling, configuration control, and plugin-based extensions**.
-
----
-
-## Features
-
-* Cross-platform **desktop application** (Electron).
-* Integrated **LLM, STT, and TTS pipelines**.
-* **Config-driven architecture** for models and assistant policies.
-* Support for **custom datasets** and corpora.
-* Extensible **plugin system** (OpenAPI-based).
-* Prebuilt **model installers** and Python integration scripts.
-
----
+<table>
+  <tr>
+    <td width="70%">
+      <h3>( Work in progress )</h3>
+      <p>
+        IJAI is a modular AI platform that integrates <b>Large Language Models (LLM)</b>,
+        <b>Speech-to-Text (STT)</b>, and <b>Text-to-Speech (TTS)</b> with a 
+        <b>cross-platform Electron + React desktop application</b>.  
+        It provides a unified environment for <b>model management, dataset handling, 
+        configuration control, and plugin-based extensions</b>.
+      </p>
+      <hr>
+      <h3>Features</h3>
+      <ul>
+        <li>Cross-platform <b>desktop application</b> (Electron).</li>
+        <li>Integrated <b>LLM, STT, and TTS pipelines</b>.</li>
+        <li><b>Config-driven architecture</b> for models and assistant policies.</li>
+        <li>Support for <b>custom datasets</b> and corpora.</li>
+        <li>Extensible <b>plugin system</b> (OpenAPI-based).</li>
+        <li>Prebuilt <b>model installers</b> and Python integration scripts.</li>
+      </ul>
+    </td>
+    <td width="30%" align="center">
+      <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/logo.png" alt="IJAI Logo" width="220"/>
+    </td>
+  </tr>
+</table>
 
 
 
