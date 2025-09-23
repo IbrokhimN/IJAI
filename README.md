@@ -1,12 +1,13 @@
 
 # IJAI Platform
 
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![License](https://img.shields.io/badge/license-AGPLv3-blue)]()
-[![Platform](https://img.shields.io/badge/platform-Electron-blue)]()
-[![Models](https://img.shields.io/badge/models-LLM%2C%20STT%2C%20TTS-orange)]()
-[![Join Us](https://img.shields.io/badge/chat-Telegram-blue?logo=telegram)](https://t.me/IJAIprj)
-
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=github" alt="Build"></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-AGPLv3-blue?style=for-the-badge&logo=open-source-initiative" alt="License"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Platform-Electron-lightgrey?style=for-the-badge&logo=electron" alt="Platform"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Models-LLM·STT·TTS-orange?style=for-the-badge&logo=opencv" alt="Models"></a>
+  <a href="https://t.me/IJAIprj"><img src="https://img.shields.io/badge/Chat-Telegram-blue?style=for-the-badge&logo=telegram" alt="Telegram"></a>
+</p>
 
 ( Work in progress )
 
