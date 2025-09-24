@@ -39,15 +39,47 @@
 
 
 ## Repository Structure
-
-```
-App/                  – Electron 
-IJAI-configs/         – Assistant and model configurations
-dataset/              – Datasets for LLM, STT, and TTS
-models/               – Integrated models and installers
-plugins/              – Plugin system (OpenAPI-based)
-share/lexicons/       – Lexicon resources
-```
+<table>
+  <thead>
+    <tr>
+      <th align="left">Directory</th>
+      <th align="left">Purpose</th>
+      <th align="left">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>App/</code></td>
+      <td>Main Electron application — UI, launch, and packaging.</td>
+      <td>Build/dev scripts: <code>npm run build</code>, <code>npm run dev</code>.</td>
+    </tr>
+    <tr>
+      <td><code>IJAI-configs/</code></td>
+      <td>Assistant and model configuration files (profiles, launch parameters).</td>
+      <td>Keep example configs under <code>examples/</code>.</td>
+    </tr>
+    <tr>
+      <td><code>dataset/</code></td>
+      <td>Datasets for LLM training/fine-tuning, corpora for STT, collections for TTS.</td>
+      <td>Specify format and license next to each dataset.</td>
+    </tr>
+    <tr>
+      <td><code>models/</code></td>
+      <td>Bundled models and installers (GGUF, ONNX, etc.).</td>
+      <td>Add a README inside each model folder with download instructions.</td>
+    </tr>
+    <tr>
+      <td><code>plugins/</code></td>
+      <td>Plugin system: OpenAPI integrations, extensions, and sample plugins.</td>
+      <td>Examples live in <code>plugins/examples/</code>.</td>
+    </tr>
+    <tr>
+      <td><code>share/lexicons/</code></td>
+      <td>Lexicon resources: dictionaries, transcription tables, localization files.</td>
+      <td>Version lexicons and cite the source.</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
