@@ -597,7 +597,7 @@ We trust the open-source community to act responsibly and improve IJAI in ways t
 
 [![Donate USDT](https://img.shields.io/badge/Donate-USDT-26A17B?style=for-the-badge&logo=tether)](https://tronscan.org/#/address/TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB)  
 
-USDT (TRC20): `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB`
+**USDT (TRC20):** `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB`
 
 
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
