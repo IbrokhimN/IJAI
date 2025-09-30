@@ -593,6 +593,11 @@ By using this project, you agree to follow these rules:
 **Important:** Any violation of these policies voids your right to use or redistribute this project under its license.  
 We trust the open-source community to act responsibly and improve IJAI in ways that benefit everyone.
 
+## 💝 Support the Developer  
+
+[![Donate USDT](https://img.shields.io/badge/Donate-USDT-26A17B?style=for-the-badge&logo=tether)](https://tronscan.org/#/address/TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB)  
+
+USDT (TRC20): `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB`
 
 
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
