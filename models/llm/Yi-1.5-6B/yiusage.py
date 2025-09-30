@@ -1,80 +1,49 @@
 from llama_cpp import Llama
-import pyttsx3
-import threading
-import queue
-import time
 
-# путь к модели
-model_path = "Yi-1.5-6B-Chat-Q4_K_M.gguf"
+# Настройка модели 
+MODEL_PATH = "Yi-1.5-6B-Chat-Q4_K_M.gguf"
 
-# загружаем модель
+# Загружаем Yi один раз при импорте
 llm = Llama(
-    model_path=model_path,
+    model_path=MODEL_PATH,
     n_ctx=4096,
     n_threads=8,
     verbose=False
 )
 
-# инициализируем TTS
-engine = pyttsx3.init()
-engine.setProperty("rate", 170)  # скорость
-engine.setProperty("volume", 1.0)
-
-# очередь для речи
-speech_queue = queue.Queue()
-
-def tts_worker():
-    """Фоновый поток: забирает текст из очереди и озвучивает"""
-    while True:
-        text = speech_queue.get()
-        if text is None:  # сигнал выхода
-            break
-        engine.say(text)
-        engine.runAndWait()
-        speech_queue.task_done()
-
-# запускаем поток TTS
-threading.Thread(target=tts_worker, daemon=True).start()
-
-print("🤖 Yi-1.5 Chat (введи 'exit' чтобы выйти)\n")
+# Контекст чата (можно сохранять, если хочешь диалог)
 messages = [{"role": "system", "content": "You are a helpful assistant."}]
 
-while True:
-    user_input = input("👤 You: ")
-    if user_input.lower() in {"exit", "quit"}:
-        speech_queue.put(None)  # останавливаем TTS поток
-        break
+def ask_yi(prompt: str, max_tokens: int = 200, temperature: float = 0.7):
+    """
+    Стриминговый вызов Yi.
+    Возвращает полный ответ, а также печатает куски в реальном времени.
 
-    messages.append({"role": "user", "content": user_input})
-    print("🤖 Bot: ", end="", flush=True)
+    Пример:
+        from yi_stream import ask_yi
+        text = ask_yi("Привет, расскажи что-нибудь интересное!")
+        print("Полный ответ:", text)
+    """
+    messages.append({"role": "user", "content": prompt})
+    print("", end="", flush=True)
 
-    # стримим ответ
+    reply = ""
     stream = llm.create_chat_completion(
         messages=messages,
-        max_tokens=200,
-        temperature=0.7,
+        max_tokens=max_tokens,
+        temperature=temperature,
         stream=True
     )
 
-    reply = ""
-    buffer = ""
     for chunk in stream:
         delta = chunk["choices"][0]["delta"]
         if "content" in delta:
             text = delta["content"]
             reply += text
-            buffer += text
+            # выводим кусочек без переноса строки
             print(text, end="", flush=True)
 
-            # отправляем куски в озвучку по предложениям
-            if any(end in buffer for end in [".", "?", "!"]):
-                speech_queue.put(buffer.strip())
-                buffer = ""
-
-    # остаток дочитать
-    if buffer.strip():
-        speech_queue.put(buffer.strip())
-
-    print("\n")
+    print()  # финальный перенос строки
     messages.append({"role": "assistant", "content": reply})
+    return reply
 
