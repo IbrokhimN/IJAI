@@ -36,11 +36,11 @@
   </tr>
 </table>
 <p align="center">
-  <strong style="color:#ff79c6;">Присоединяйся</strong>
+  <strong style="color:#ff79c6;">Join Us</strong>
 </p>
 
 <p align="center">
-  Сканируй QR-код, чтобы подключиться к IJAI.
+  Scan the QR code to connect to IJAI.
 </p>
 
 <p align="center">
