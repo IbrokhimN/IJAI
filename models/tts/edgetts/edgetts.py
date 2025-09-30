@@ -1,74 +1,58 @@
 import asyncio
-import edge_tts
 import threading
 import queue
 import os
 import uuid
-import sys
 from pathlib import Path
+import edge_tts
 
-# === Настройки ===
-VOICE = "ru-RU-DmitryNeural"   # голос (ru-RU-SvetlanaNeural, en-US-AriaNeural, ...)
-PLAYER_CMD = "mpg123 -q"       # любой CLI-плеер (mpg123, ffplay -nodisp -autoexit ...)
-TMP_DIR = Path("tts_tmp")      # папка для временных файлов
+# Default voice for Russian speech. Change if you like suffering with accents.
+VOICE = "ru-RU-DmitryNeural"
+
+# Simple ffmpeg player command. We don't want GUI crap, just sound.
+PLAYER_CMD = "ffplay -nodisp -autoexit -loglevel quiet"
+
+# Temp directory for mp3 chunks. We nuke files after playback anyway.
+TMP_DIR = Path(__file__).parent / "tts_tmp"
 TMP_DIR.mkdir(exist_ok=True)
 
-# Очередь для озвучки
+# Queue of text chunks waiting for TTS.
 speech_queue = queue.Queue()
 
 async def speak(text: str):
-    """Генерируем mp3 и проигрываем"""
+    """
+    Synthesize and play a single text chunk.
+    Generates an mp3, plays it, and removes it immediately after.
+    """
     filename = TMP_DIR / f"tts_{uuid.uuid4().hex}.mp3"
     tts = edge_tts.Communicate(text, voice=VOICE)
     await tts.save(str(filename))
-    os.system(f"{PLAYER_CMD} {filename}")
+    os.system(f"{PLAYER_CMD} {filename.resolve()}")
+    # Clean up like an adult. Ignore if already gone.
     try:
         filename.unlink()
     except FileNotFoundError:
         pass
 
 def tts_worker():
-    """Фоновый поток: берёт текст из очереди и озвучивает"""
+    """
+    Background thread:
+    - Pull text from the queue
+    - Call TTS coroutine inside its own event loop
+    - Stop when None is received
+    """
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     while True:
         text = speech_queue.get()
-        if text is None:
+        if text is None:  # Shutdown signal
             break
         loop.run_until_complete(speak(text))
         speech_queue.task_done()
 
-# Запуск фонового потока
-threading.Thread(target=tts_worker, daemon=True).start()
-
-# === Пример генерации текста ===
-# Здесь вместо модели просто читаем текст из stdin по кускам,
-# но можно подключить llm.create_chat_completion(stream=True)
-def main():
-    print("🔊 Edge-TTS Demo (вводите текст, exit для выхода)")
-    buffer = ""
-    for line in sys.stdin:
-        line = line.strip()
-        if line.lower() in {"exit", "quit"}:
-            speech_queue.put(None)
-            break
-        # эмуляция "стрима": выводим по словам
-        for word in line.split():
-            print(word, end=" ", flush=True)
-            buffer += word + " "
-            # когда есть завершение предложения — шлём в TTS
-            if any(buffer.endswith(end + " ") for end in [". ", "? ", "! "]):
-                speech_queue.put(buffer.strip())
-                buffer = ""
-        print()
-        if buffer.strip():
-            # остаток в конце строки
-            speech_queue.put(buffer.strip())
-            buffer = ""
-
-if __name__ == "__main__":
-    try:
-        main()
-    finally:
-        speech_queue.put(None)
-
+def start_tts():
+    """
+    Spin up the TTS worker in a daemon thread.
+    Fire and forget—this process dies with the main thread anyway.
+    """
+    threading.Thread(target=tts_worker, daemon=True).start()
