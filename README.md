@@ -35,6 +35,18 @@
     </td>
   </tr>
 </table>
+<p align="center">
+  <strong style="color:#ff79c6;">Присоединяйся</strong>
+</p>
+
+<p align="center">
+  Сканируй QR-код, чтобы подключиться к IJAI.
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/qr.png" 
+       alt="QR Код" style="width:500px; height:auto; border-radius:8px;"/>
+</p>
 
 
 
