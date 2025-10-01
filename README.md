@@ -512,8 +512,24 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 
 ---
 
+## Project Stats
 
----
+### Star History
+<p align="center">
+  <a href="https://star-history.com/#IbrokhimN/IJAI&Date">
+    <img src="https://api.star-history.com/svg?repos=IbrokhimN/IJAI&type=Date" alt="Star History Chart" width="600">
+  </a>
+</p>
+
+### Contributors
+<p align="center">
+  <a href="https://github.com/IbrokhimN/IJAI/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=IbrokhimN/IJAI" alt="Contributors">
+  </a>
+</p>
+
+
+
 
 ## Roadmap
 
