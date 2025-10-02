@@ -1,75 +1,87 @@
 import os
 import sys
 import functools
+import importlib.util
 from pathlib import Path
-from llama_cpp import Llama
 from tts.edgetts.edgetts import speech_queue, start_tts
 
-# Always flush stdout to avoid buffering issues in interactive mode.
+# Always flush stdout. Otherwise, enjoy invisible logs.
 print = functools.partial(print, flush=True)
 
-# Path to the quantized LLaMA model. Adjust if you move the model.
-MODEL_PATH = str(Path("~/IJAI/models/llm/yi-1.5-6b-chat-q4/Yi-1.5-6B-Chat-Q4_K_M.gguf").expanduser())
+def load_module(module_name: str, file_path: str):
+    """Load a Python module from an arbitrary file path."""
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    if spec is None:
+        raise ImportError(f"Cannot find spec for {file_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return module
 
 class SilentStdErr:
-    """
-    Context manager to temporarily silence stderr.
-    Useful for noisy libraries (looking at you, llama_cpp).
-    """
+    """Context manager to silence stderr temporarily."""
     def __enter__(self):
-        self.stderr_fd = os.dup(2)              # Save current stderr
+        self.stderr_fd = os.dup(2)
         self.devnull = os.open(os.devnull, os.O_WRONLY)
-        os.dup2(self.devnull, 2)                # Redirect stderr to /dev/null
+        os.dup2(self.devnull, 2)
         return self
     def __exit__(self, *a):
-        os.dup2(self.stderr_fd, 2)              # Restore stderr
+        os.dup2(self.stderr_fd, 2)
         os.close(self.devnull)
         os.close(self.stderr_fd)
 
-# Make sure the model is actually there. Don't waste CPU cycles otherwise.
-if not Path(MODEL_PATH).exists():
-    raise FileNotFoundError(f"Model not found: {MODEL_PATH}")
+# Base path
+BASE = Path(__file__).resolve().parent
+CHOICE_FILE = BASE / "model_choice.txt"
 
-# Kick off TTS in a separate thread. Let it run; we don't care how.
+# Figure out which model to load
+if CHOICE_FILE.exists():
+    model_choice = CHOICE_FILE.read_text().strip()
+    print(f"✅ Loaded previous choice: {model_choice}")
+else:
+    while True:
+        choice = input("👉 Pick a model ('yi' or 'phi'): ").strip().lower()
+        if choice in ["yi", "phi"]:
+            model_choice = choice
+            CHOICE_FILE.write_text(model_choice)
+            break
+        print("⚠️ Invalid choice. Type 'yi' or 'phi'.")
+
+# Load only the chosen model
+if model_choice == "yi":
+    module_path = BASE / "llm/yi-1.5-6b-chat-q4/yiusage.py"
+    engine = load_module("yiusage", str(module_path))
+    print("🚀 Yi model loaded. Start chatting!")
+
+elif model_choice == "phi":
+    module_path = BASE / "llm/phi-3-mini/phiusage.py"
+    engine = load_module("phiusage", str(module_path))
+    print("🚀 Phi-3-mini model loaded. Start chatting!")
+
+# Start TTS
 start_tts()
 
-# Load the LLaMA model with stderr muted to avoid spam from ggml internals.
-with SilentStdErr():
-    llm = Llama(model_path=MODEL_PATH, n_ctx=2048, n_threads=4)
+print("💬 Type 'exit' or Ctrl+C to quit.")
 
-print("💬 Enter a prompt. Type 'exit' or Ctrl+C to quit.")
-
-# Main REPL loop: ask, generate, speak, repeat.
 while True:
     try:
-        prompt = input("\n👉 Your input: ")
+        prompt = input("\n👤 You: ")
         if prompt.strip().lower() in ["exit", "quit"]:
             break
 
-        buffer = ""  # Holds generated text until a full sentence is ready for TTS.
-
-        # Stream tokens as they come in; silence any llama_cpp whining.
+        # Use engine.ask(), it streams text itself
         with SilentStdErr():
-            for chunk in llm.create_chat_completion(
-                    messages=[{"role": "user", "content": prompt}],
-                    stream=True):
-                delta = chunk["choices"][0]["delta"].get("content", "")
-                if delta:
-                    print(delta, end="", flush=True)
-                    buffer += delta
-                    # Send sentence to TTS as soon as it looks complete.
-                    if any(buffer.endswith(end) for end in [".", "!", "?"]):
-                        speech_queue.put(buffer.strip())
-                        buffer = ""
+            reply = engine.ask(prompt, max_tokens=200, temperature=0.7)
 
-        # Send whatever's left if it doesn't end in punctuation.
-        if buffer.strip():
-            speech_queue.put(buffer.strip())
+        # Send the final reply to TTS
+        if reply.strip():
+            speech_queue.put(reply.strip())
 
         print()
     except KeyboardInterrupt:
         print("\nExiting chat...")
         break
 
-# Tell the TTS thread to shut down gracefully.
+# Shut down TTS thread
 speech_queue.put(None)
+
