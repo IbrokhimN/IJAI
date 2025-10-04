@@ -472,6 +472,7 @@ Each model folder provides:
 
 ---
 
+
 ## Installation
 
 ```bash
@@ -493,6 +494,11 @@ npm run build
 Model installation is handled by individual `installer.sh` scripts inside each model folder.
 
 ---
+
+## CLI - version
+
+<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/CLI.png" alt="IJAI CLI"/>
+
 
 ## Usage
 
@@ -527,6 +533,7 @@ Model installation is handled by individual `installer.sh` scripts inside each m
     <img src="https://contrib.rocks/image?repo=IbrokhimN/IJAI" alt="Contributors">
   </a>
 </p>
+
 
 
 
