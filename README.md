@@ -543,8 +543,8 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 ### ✅ Completed (Ready for Release)
 - [x] Core Electron ( betta version )
 - [x] LLM integration (Phi-3 Mini, GPT-Neo, LLaMA-3, DeepSeek R1)  
-- [ ] STT integration (Whisper Small)  
-- [ ] TTS pipeline (TTS Small + Vocoder)  
+- [x] STT integration (Whisper Small)  
+- [x] TTS pipeline (TTS Small + Vocoder)  
 - [x] Config-driven architecture (assistant, models, policies)  
 - [x] Plugin framework (OpenAPI-based, example: Weather)  
 - [x] Model installer scripts (`installer.sh`)  
@@ -560,7 +560,7 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 - [ ] Model fine-tuning workflow (UI + CLI prototype)  
 - [ ] Interactive prompt playground for LLMs  
 - [ ] Voice cloning demo for TTS  
-- [ ] Speech-to-speech pipeline (STT → LLM → TTS)  
+- [x] Speech-to-speech pipeline (STT → LLM → TTS)  
 - [ ] Minimal plugin marketplace (manual install)  
 
 ---
@@ -570,7 +570,7 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 - [ ] GPU acceleration benchmarks (CUDA / ROCm)  
 - [ ] Model caching & optimized loading (disk + RAM)  
 - [ ] Dataset versioning & tagging  
-- [ ] CLI tool (`ijai-cli`) for headless workflows  
+- [x] CLI tool (`ijai-cli`) for headless workflows  
 - [ ] Enhanced error logging & monitoring dashboard  
 - [ ] Extended plugin APIs (beyond Weather)  
 
