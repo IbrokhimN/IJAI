@@ -7,7 +7,7 @@
   <a href="#"><img src="https://img.shields.io/badge/Platform-Electron-lightgrey?style=for-the-badge&logo=electron" alt="Platform"></a>
   <a href="#"><img src="https://img.shields.io/badge/Models-LLM·STT·TTS-orange?style=for-the-badge&logo=opencv" alt="Models"></a>
   <a href="https://t.me/IJAIprj"><img src="https://img.shields.io/badge/Chat-Telegram-blue?style=for-the-badge&logo=telegram" alt="Telegram"></a>
-  
+  <br>
 <a href="https://github.com/IbrokhimN/IJAI/pulse">
   <img alt="Last commit" src="https://img.shields.io/github/last-commit/IbrokhimN/IJAI?style=for-the-badge&logo=starship&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/>
 </a>
