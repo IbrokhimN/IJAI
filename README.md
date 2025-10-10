@@ -630,26 +630,31 @@ We trust the open-source community to act responsibly and improve IJAI in ways t
 
 ## 💝 Support the Developer
 
-If my projects or research were useful to you, you can support further development using the methods below.
+You can support me via crypto, Steam trade or Click. Any help is appreciated!
 
 ---
 
 ### 💳 Crypto Donations
 | Currency | Network | Address |
-|-----------|----------|---------|
+|----------|---------|---------|
 | USDT | TRC20 | `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB` |
 
 ---
 
 ### 🎮 Steam Trade
-If you’d like to send items or gifts through Steam:  
-
 [![Trade with me on Steam](https://img.shields.io/badge/Trade_with_me_on_Steam-1b2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/tradeoffer/new/?partner=1507940107&token=XQgjFkwz)
 
 ---
 
-Thank you for your support — it helps me continue building and improving open-source projects.
+### 📲 Click (P2P)
+You can send via Click using the app:
+<br>
+[![Pay via Click](https://img.shields.io/badge/Pay_via_Click-FF6B6B?style=for-the-badge&logo=click&logoColor=white)](https://my.click.uz/clickp2p/46F857F406CCE4B622448AC75CEFAA6E7CB57AC825AEDDD1C7CBB7C14D3C1B20)
 
+
+---
+
+Thank you for your support. It helps me keep working on projects.  
 
 
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
