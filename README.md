@@ -628,11 +628,28 @@ By using this project, you agree to follow these rules:
 **Important:** Any violation of these policies voids your right to use or redistribute this project under its license.  
 We trust the open-source community to act responsibly and improve IJAI in ways that benefit everyone.
 
-## 💝 Support the Developer  
+## 💝 Support the Developer
 
-[![Donate USDT](https://img.shields.io/badge/Donate-USDT-26A17B?style=for-the-badge&logo=tether)](https://tronscan.org/#/address/TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB)  
+If my projects or research were useful to you, you can support further development using the methods below.
 
-**USDT (TRC20):** `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB`
+---
+
+### 💳 Crypto Donations
+| Currency | Network | Address |
+|-----------|----------|---------|
+| USDT | TRC20 | `TPutzJ12Bs4jAPLT9rkQhvg6PdwHhQfJVB` |
+
+---
+
+### 🎮 Steam Trade
+If you’d like to send items or gifts through Steam:  
+
+[![Trade with me on Steam](https://img.shields.io/badge/Trade_with_me_on_Steam-1b2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/tradeoffer/new/?partner=1507940107&token=XQgjFkwz)
+
+---
+
+Thank you for your support — it helps me continue building and improving open-source projects.
+
 
 
 > Prebuilt model weights and installers are available via the official distribution channel: [Telegram](https://t.me/IJAIprj).
