@@ -1,0 +1,25 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                          IJAI CLI - Terminal AI                      ║
+╠══════════════════════════════════════════════════════════════════════╣
+║ Description:                                                         ║
+║   Simple command-line interface for interacting with IJAI models.    ║
+║   Streams responses in real-time and supports text-to-speech output. ║
+╠══════════════════════════════════════════════════════════════════════╣
+║ Installation:                                                        ║
+║   1. Ensure Python 3 is installed                                    ║
+║   2. Run the installer: ./installer.sh                               ║
+║   3. Launch the CLI: ijai_cli                                        ║
+╠══════════════════════════════════════════════════════════════════════╣
+║ Usage:                                                               ║
+║   • Type your question and press Enter                               ║
+║   • AI will respond immediately and read out the first sentence      ║
+║   • CPU/RAM stats are shown in the corner                            ║
+║   • Type 'exit' or 'quit' to leave                                   ║
+╠══════════════════════════════════════════════════════════════════════╣
+║ Notes:                                                               ║
+║   • Model selection is persistent                                    ║
+║   • Works on Linux (and WSL for Windows)                             ║
+║   • No extra configuration required once installed                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+it is the first version and it still misses stt so wait for it
