@@ -29,7 +29,7 @@ We will:
 
 ---
 
-## 🧠 Our Security Principles
+## Our Security Principles
 1. **Transparency** — we openly communicate about fixed vulnerabilities.  
 2. **Confidentiality** — all reports are kept private until resolved.  
 3. **Integrity** — we verify all patches and dependency updates.  
@@ -37,7 +37,7 @@ We will:
 
 ---
 
-## 💾 Recommendations for Users
+## Recommendations for Users
 To keep your IJAI installation secure:
 1. Always run the **latest stable version**.  
 2. Avoid exposing internal endpoints publicly.  
