@@ -509,7 +509,7 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 
 ## CLI - version
 
-<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/CLI.png" alt="IJAI CLI"/>
+<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/CLI_enhanced.png" alt="IJAI CLI"/>
 
 
 ## Usage
