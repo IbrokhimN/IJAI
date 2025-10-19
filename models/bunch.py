@@ -46,7 +46,7 @@ def gradient_logo(stdscr=None):
             stdscr.attron(curses.color_pair(i + 1))
             stdscr.addstr(2 + i, w // 2 - 14, line)
             stdscr.attroff(curses.color_pair(i + 1))
-        stdscr.addstr(2 + len(logo), w // 2 - 4, "v 0.5.0", curses.color_pair(6))
+        stdscr.addstr(2 + len(logo), w // 2 - 4, "v 0.2.0", curses.color_pair(6))
     else:
         print("\n".join(logo), "\nv 0.5.0\n")
 
