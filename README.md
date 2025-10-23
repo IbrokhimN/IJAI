@@ -43,7 +43,7 @@
       </ul>
     </td>
     <td width="30%" align="center">
-      <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/logo.png" alt="IJAI Logo" width="220"/>
+      <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/imgs/ijai.jpg" alt="IJAI Logo" width="220"/>
     </td>
   </tr>
 </table>
@@ -56,7 +56,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/qr.png" 
+  <img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/imgs/QR.png" 
        alt="QR Код" style="width:500px; height:auto; border-radius:8px;"/>
 </p>
 
@@ -509,8 +509,8 @@ Model installation is handled by individual `installer.sh` scripts inside each m
 
 ## CLI - version
 
-<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/CLI_enhanced.png" alt="IJAI CLI"/>
-<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/AI_usage.png" alt="AI usage file"/>
+<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/imgs/CLI_enhanced.png" alt="IJAI CLI"/>
+<img src="https://raw.githubusercontent.com/IbrokhimN/IJAI/refs/heads/main/imgs/CLIv2.png" alt="AI usage file"/>
 
 
 ## Usage
