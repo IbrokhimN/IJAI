@@ -431,6 +431,5 @@ def main(stdscr):
         elif key == curses.KEY_DOWN: scroll = max(scroll-1, 0)  # Scroll down
         elif isinstance(key, str):  # Normal character input
             inp = inp[:curx] + key + inp[curx:]; curx += len(key)  # Add character and move cursor
-
-if __name__ == "__main__":
-    os.system("clear"); curses.wrapper(main)  # Clear screen and start the fucking show
+            
+os.system("clear"); curses.wrapper(main) 
