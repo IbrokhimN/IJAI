@@ -19,9 +19,6 @@
   </a>
 <p align="center"> <em style="font-size: 18px; opacity: 0.8;"> This project is currently on hold due to personal circumstances.<br> Development is expected to resume after <strong>December 6, 2025</strong>. </em> </p>
 
-****This project is currently on hold due to the developer’s personal reasons.
-Further development is expected to resume after December 6, 2025.****
-
 </p>
 <table>
   <tr>
