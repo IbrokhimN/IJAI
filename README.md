@@ -17,7 +17,10 @@
   <a href="https://github.com/IbrokhimN/IJAI/network/members">
     <img alt="Forks" src="https://img.shields.io/github/forks/IbrokhimN/IJAI?style=for-the-badge&logo=git&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/>
   </a>
+<p align="center"> <em style="font-size: 18px; opacity: 0.8;"> This project is currently on hold due to personal circumstances.<br> Development is expected to resume after <strong>December 6, 2025</strong>. </em> </p>
 
+****This project is currently on hold due to the developer’s personal reasons.
+Further development is expected to resume after December 6, 2025.****
 
 </p>
 <table>
