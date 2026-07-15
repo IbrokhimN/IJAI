@@ -1,12 +1,23 @@
 import os, sys, re, time, textwrap, curses, threading, importlib.util, functools, sounddevice as sd, json, subprocess
 from pathlib import Path
-from tts.edgetts.edgetts import speech_queue, start_tts
 
 print = functools.partial(print, flush=True)
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stdin.reconfigure(encoding="utf-8")
 
 BASE = Path(__file__).resolve().parent
+sys.path.insert(0, str(BASE))
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+_edgetts = load_module("edgetts", str(BASE / "tts" / "edgetts" / "edgetts.py"))
+speech_queue = _edgetts.speech_queue
+start_tts = _edgetts.start_tts
 CHOICE_FILE = BASE / "model_choice.txt"
 INPUT_FILE = BASE / "input_mode.txt"
 MIC_FILE = BASE / "mic_choice.txt"
@@ -15,17 +26,7 @@ MEMORY_FILE = BASE / "memory.json"
 tts_enabled = True
 stop_event = threading.Event()
 
-# Utils - because who doesn't love utilities?
-def load_module(name, path):
-    """Load a fucking module like a boss"""
-    spec = importlib.util.spec_from_file_location(name, path)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules[name] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
 class SilentStdErr:
-    """Shut the fuck up, stderr!"""
     def __enter__(self):
         self.fd = os.dup(2)
         self.devnull = os.open(os.devnull, os.O_WRONLY)
@@ -61,21 +62,19 @@ def gradient_logo(stdscr=None):
 # Modules - the brain of this whole operation
 # =========================
 def load_whisper():
-    """Load Whisper so we can actually hear what the fuck you're saying"""
-    p = BASE / "stt" / "whisper-medium" / "whismedium.py"
+    p = BASE / "stt" / "whisper-medium" / "whispermedium.py"
     if not p.exists(): return None
-    return load_module("whismedium", str(p)).VoiceListener()
+    return load_module("whispermedium", str(p)).VoiceListener()
 
 def load_engine():
-    """Choose your AI poison - the smart one or the other smart one"""
     if not CHOICE_FILE.exists():
-        CHOICE_FILE.write_text("yi")  # Default to the good shit
+        CHOICE_FILE.write_text("yi")
     model_choice = CHOICE_FILE.read_text().strip().lower()
     if model_choice == "yi":
-        path = BASE / "llm" / "yi-1.5-6b-chat-q4" / "yiusage.py"
+        path = BASE / "llm" / "Yi-1.5-6B" / "yiusage.py"
         eng = load_module("yiusage", str(path))
     else:
-        path = BASE / "llm" / "phi-3-mini" / "phi3usage.py"
+        path = BASE / "llm" / "phi3mini" / "phi3usage.py"
         eng = load_module("phiusage", str(path))
     return eng
 
@@ -432,4 +431,6 @@ def main(stdscr):
         elif isinstance(key, str):  # Normal character input
             inp = inp[:curx] + key + inp[curx:]; curx += len(key)  # Add character and move cursor
             
-os.system("clear"); curses.wrapper(main) 
+if __name__ == "__main__":
+    os.system("clear")
+    curses.wrapper(main)

@@ -1,1 +1,22 @@
-
+{
+  "name": "ijai-dashboard",
+  "productName": "IJAI Dashboard",
+  "version": "0.2.0",
+  "description": "IJAI Platform desktop dashboard",
+  "main": "main.js",
+  "author": "IbrokhimN",
+  "license": "AGPL-3.0",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

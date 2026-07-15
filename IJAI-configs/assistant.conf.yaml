@@ -1,0 +1,31 @@
+name: IJAI
+version: 0.2.0
+language: en
+persona: helpful
+max_context_tokens: 4096
+response_format: markdown
+
+engine:
+  default_llm: yi
+  fallback_llm: phi
+  default_stt: whisper-small
+  default_tts: edgetts
+  gpu: auto
+  quantization: q4
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  format: wav
+
+runtime:
+  log_level: INFO
+  save_memory: true
+  memory_file: models/memory.json
+  allow_plugins: true
+
+paths:
+  models_dir: models
+  dataset_dir: dataset
+  configs_dir: IJAI-configs
+  plugins_dir: plugins

@@ -9,9 +9,9 @@ files:
   - "preload.js"
   - "package.json"
 win:
-  icon: src/icons/IJAI-logo.png
+  icon: src/assets/IJAI-logo.png
 linux:
-  icon: src/icons/IJAI-logo.png
+  icon: src/assets/IJAI-logo.png
+  category: Utility
 mac:
-  icon: src/icons/IJAI-logo.png
-
+  icon: src/assets/IJAI-logo.png

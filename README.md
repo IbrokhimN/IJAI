@@ -485,6 +485,24 @@ Each model folder provides:
 ---
 
 
+## Quick Start
+
+```bash
+# Linux / macOS
+./run.sh
+
+# Windows
+run.bat
+```
+
+This opens an interactive launcher to run the terminal CLI, the Electron desktop app, or the full installer. You can also skip the menu:
+
+```bash
+python3 launch.py cli      # terminal UI
+python3 launch.py app      # desktop dashboard
+python3 launch.py install  # full system installer (Linux/macOS)
+```
+
 ## Installation
 
 ```bash

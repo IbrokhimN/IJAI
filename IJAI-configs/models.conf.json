@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "sets": {
+    "minimal": {
+      "llm": "llm/gpt2-medium",
+      "stt": "stt/Silero",
+      "tts": "tts/tts-small",
+      "vocoder": "tts/vocoder"
+    },
+    "full": {
+      "llm": [
+        "codellm", "codellama", "ollama-deepseekr1:8b",
+        "llm/Falcon-7B", "llm/GPT-NeoX-20B", "llm/Gemma",
+        "llm/LLaMA-2", "llm/MPT", "llm/Mistral-7B", "llm/OPT",
+        "llm/Qwen-1.5", "llm/StableLM", "llm/Yi-1.5-6B",
+        "llm/gpt-j-6b", "llm/gpt-neo", "llm/gpt2-medium",
+        "llm/phi3mini", "llm/ollama-llama3"
+      ],
+      "stt": [
+        "stt/Coqui", "stt/DeepSpeech", "stt/Faster-Whisper",
+        "stt/Nemo ASR", "stt/Silero", "stt/Vosk",
+        "stt/whisper-small", "stt/whisper-medium"
+      ],
+      "tts": ["tts/Parler-TTS", "tts/tts-small", "tts/edgetts"],
+      "vocoder": ["tts/vocoder"]
+    }
+  },
+  "models": {
+    "yi": {
+      "path": "models/llm/Yi-1.5-6B",
+      "entrypoint": "yiusage.py",
+      "params": "6B",
+      "quantization": "q4"
+    },
+    "phi": {
+      "path": "models/llm/phi3mini",
+      "entrypoint": "phi3usage.py",
+      "params": "3.8B",
+      "quantization": "q4"
+    },
+    "whisper-small": {
+      "path": "models/stt/whisper-small",
+      "entrypoint": "whisper-small.py"
+    },
+    "whisper-medium": {
+      "path": "models/stt/whisper-medium",
+      "entrypoint": "whispermedium.py"
+    },
+    "silero": {
+      "path": "models/stt/Silero",
+      "entrypoint": "silero_stt.py"
+    },
+    "edgetts": {
+      "path": "models/tts/edgetts",
+      "entrypoint": "edgetts.py"
+    }
+  }
+}
